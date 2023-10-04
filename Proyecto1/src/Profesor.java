@@ -12,11 +12,28 @@ public class Profesor extends Trabajador {
     int añosExper;
     Curso[] cursos;
 
-    public Profesor(int añosExper, Curso[] cursos, float salario, String cedula, String nombre1, String nombre2, String Apellido1, String Apellido2, int FechaNacmto) {
+    public Profesor() {
+        super();
+    }
+
+    public Profesor(int añosExper) {
+        this.añosExper = añosExper;
+    }
+
+    public Profesor(int añosExper, float salario, String cedula, String nombre1, String nombre2, String Apellido1,
+            String Apellido2, String FechaNacmto) {
         super(salario, cedula, nombre1, nombre2, Apellido1, Apellido2, FechaNacmto);
         this.añosExper = añosExper;
-        this.cursos = cursos;
     }
+    
+    public int getAñosExper() {
+        return this.añosExper;
+    }
+
+    public void setAñosExper(int añosExper) {
+        this.añosExper = añosExper;
+    }
+
 
     @Override
     public String toString() {

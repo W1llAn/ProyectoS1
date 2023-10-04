@@ -16,9 +16,12 @@ class Persona {
     String nombre2;
     String Apellido1;
     String Apellido2;
-    int FechaNacmto;
+    String FechaNacmto;
 
-    public Persona(String cedula, String nombre1, String nombre2, String Apellido1, String Apellido2, int FechaNacmto) {
+    public Persona() {
+    }
+
+    public Persona(String cedula, String nombre1, String nombre2, String Apellido1, String Apellido2, String FechaNacmto) {
         this.cedula = cedula;
         this.nombre1 = nombre1;
         this.nombre2 = nombre2;
@@ -67,11 +70,11 @@ class Persona {
         this.Apellido2 = Apellido2;
     }
 
-    public int getFechaNacmto() {
+    public String getFechaNacmto() {
         return FechaNacmto;
     }
 
-    public void setFechaNacmto(int FechaNacmto) {
+    public void setFechaNacmto(String FechaNacmto) {
         this.FechaNacmto = FechaNacmto;
     }
     

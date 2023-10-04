@@ -11,8 +11,21 @@ public class Trabajador extends Persona {
 
     float salario;
 
-    public Trabajador(float salario, String cedula, String nombre1, String nombre2, String Apellido1, String Apellido2, int FechaNacmto) {
+    public Trabajador() {
+        super();
+    }
+
+    public Trabajador(float salario, String cedula, String nombre1, String nombre2, String Apellido1, String Apellido2,
+            String FechaNacmto) {
         super(cedula, nombre1, nombre2, Apellido1, Apellido2, FechaNacmto);
+        this.salario = salario;
+    }
+
+    public float getSalario() {
+        return this.salario;
+    }
+
+    public void setSalario(float salario) {
         this.salario = salario;
     }
 
