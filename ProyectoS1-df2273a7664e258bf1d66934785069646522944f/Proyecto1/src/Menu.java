@@ -23,7 +23,14 @@ public class Menu {
             op = tec.Tec().nextInt();
             switch (op) {
                 case 1:
-                    System.out.println("Bienvenido a la opción 1");
+                    do{
+                    System.out.println("Bienvenido a la opción Ingreso de Estudiantes");
+                    Estudiante estudiantes = new Estudiante();
+                    PedirDatosEstudiantes(estudiantes);
+                    gestor.registrarEstudiantes(estudiantes);
+                    System.out.println("Desea registrar a un estudiante nuevo\n ¿S/N?: ");
+                    opcSn = tec.Tec().next().toUpperCase().charAt(0);
+                }while (opcSn == 'S');
                     break;
                 case 2:
                     do {
@@ -55,7 +62,7 @@ public class Menu {
                         case 2:
                             System.out.println("|-----------------------------------|");
                             System.out.println("|--------E S T U D I A N T E S -----|");
-                            gestor.imprimirPersonas();
+                            gestor.imprimirEstudiantes();
                             System.out.println("|___________________________________|");
                             break;
                     }
@@ -87,37 +94,26 @@ public class Menu {
     public Profesor PedirDatosProfesores(Profesor profe) {
         System.out.println("---Registro de Profesores-----");
         profe.setCedula(contrls.ControlCedula());
-        profe.setNombre1(contrls.Palabras("Primer Nombre:"));
-        profe.setNombre2(contrls.Palabras("Segundo Nombre:"));
-        profe.setApellido1(contrls.Palabras("Apellido Paterno:"));
-        profe.setApellido2(contrls.Palabras("Apellido Materno:"));
+        profe.setNombre1(contrls.Palabras("Primer Nombre: "));
+        profe.setNombre2(contrls.Palabras("Segundo Nombre: "));
+        profe.setApellido1(contrls.Palabras("Apellido Paterno: "));
+        profe.setApellido2(contrls.Palabras("Apellido Materno: "));
         profe.setFechaNacmto(contrls.controlFechaNacmto());
-        profe.setAñosExper(contrls.ControlNumrs("Años de experiencia:"));
-        profe.setSalario(contrls.ControlNumrs("Salario:"));
+        profe.setAñosExper(contrls.ControlNumrs("Años de experiencia: "));
+        profe.setSalario(contrls.ControlNumrs("Salario: "));
         return profe;
     }
 
-    public void PedirDatosEstudiantes() {
-        System.out.println("---Registro de Estudiantes-----");
-        do {
-            System.out.print("Cédula:");
-            cedula = tec.Tec().next();
-            System.out.print("Primer Nombre: ");
-            nom1 = tec.Tec().next();
-            System.out.print("Segundo Nombre: ");
-            nom2 = tec.Tec().next();
-            System.out.print("Apellido Paterno: ");
-            apelldo1 = tec.Tec().next();
-            System.out.print("Apellido Materno: ");
-            apelldo2 = tec.Tec().next();
-            System.out.print("Fecha de nacimiento(dd/mm/aaaa): ");
-            fechNacmto = tec.Tec().nextInt();
-            System.out.println("Dirección: ");
-            direccion = tec.Tec().next();
-            System.out.print("Desea Registrar un profesor nuevo\n ¿S/N?:");
-            opcSn = tec.Tec().next().toUpperCase().charAt(0);
-
-        } while (opcSn == 'S');
+    public Estudiante PedirDatosEstudiantes(Estudiante estudiantes) {
+        System.out.println("-----Registro de Estudiantes-----");
+        estudiantes.setCedula(contrls.ControlCedula());
+        estudiantes.setNombre1(contrls.Palabras("Primer Nombre: "));
+        estudiantes.setNombre2(contrls.Palabras("Segundo Nombre: "));
+        estudiantes.setApellido1(contrls.Palabras("Apellido Paterno: "));
+        estudiantes.setApellido2(contrls.Palabras("Apellido Materno: "));
+        estudiantes.setFechaNacmto(contrls.controlFechaNacmto());
+        estudiantes.setDireccion(contrls.controlarCaracteresEspeciales("Direccion: "));
+        return estudiantes;
     }
 
     public void subMenu() {

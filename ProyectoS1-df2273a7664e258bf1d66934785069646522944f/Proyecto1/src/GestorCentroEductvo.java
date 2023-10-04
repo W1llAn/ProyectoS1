@@ -49,6 +49,29 @@ public class GestorCentroEductvo {
     }
 
     int cantidadProfesores = 0;
+    int cantidadEstudiantes = 0;
+
+    
+    public void registrarEstudiantes(Estudiante estudiante){
+        if(cantidadEstudiantes < this.estudiantes.length){
+            this.estudiantes[cantidadEstudiantes]=estudiante;
+            cantidadEstudiantes++;
+            System.out.println("Estudiante registrado correctamente! ");
+        }else{
+            System.out.println("No es posible registrar mas estudiantes. Se alcanzo la capacidad máxima. ");
+        }
+    }
+
+    public boolean cedulaRepetida(String cedula) {
+    for (int i = 0; i < estudiantes.length; i++) {
+       
+        if (estudiantes[i] != null && estudiantes[i].getCedula().equals(cedula)) {
+             System.out.println(estudiantes[i].getNombre1()+"------------------------------------");
+            return true; // La cédula ya existe en una posición válida del arreglo
+        }
+    }
+    return false; // La cédula no existe en ninguna posición válida
+}
 
     public void registrarProfesor(Profesor profesor) {
         if (cantidadProfesores < profesores.length) {
@@ -72,4 +95,18 @@ public class GestorCentroEductvo {
             System.out.println("-----------------------------");
         }
     }
+    public void imprimirEstudiantes(){
+            System.out.println("Lista de Estudiantes:");
+            for (int i = 0; i < cantidadEstudiantes; i++) {
+            Estudiante estudiante = estudiantes[i];
+            System.out.println("Cédula: " + estudiante.getCedula().toUpperCase());
+            System.out.println("Nombre: " + estudiante.getNombre1().toUpperCase() + " " + estudiante.getNombre2().toUpperCase()
+                    + " " + estudiante.getApellido1().toUpperCase() + " " +estudiante.getApellido2().toUpperCase());
+            System.out.println("Fecha de Nacimiento: " + estudiante.getFechaNacmto());
+            System.out.println("Dirección " + estudiante.getDireccion());
+            System.out.println("-----------------------------");
+        }
+
+    }
+    
 }

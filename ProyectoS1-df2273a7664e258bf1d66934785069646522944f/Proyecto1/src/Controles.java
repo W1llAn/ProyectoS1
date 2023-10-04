@@ -16,16 +16,30 @@ public class Controles {
         } while (!(palabra.matches(patron)));
         return palabra;
     }
+    public String controlarCaracteresEspeciales(String mensaje){
+        String patron,palabra;
+        patron = "^[a-zA-ZñÑ ]+$";
+        do{
+            System.out.println(mensaje);
+            palabra = tec.Tec().next();
+            if(!(palabra.matches(patron))){
+                System.out.println("No se permiten el ingreso de caracteres especiales ");
+            }
+        }while (!(palabra.matches(patron)));
+    return palabra;
+    }
 
     public String ControlCedula() {
+        GestorCentroEductvo gEductvo = new GestorCentroEductvo();
         String cedula, patron;
         patron = "^[0-9]{10}$";
         boolean aux = false;
 
         do {
-            System.out.print("Cédula:");
-            cedula = tec.Tec().next();
-
+         do {
+    System.out.print("Cédula: ");
+     cedula = tec.Tec().next();
+} while (gEductvo.cedulaRepetida(cedula));
             if (cedula.matches(patron)) {
                 int primerosdos = Integer.parseInt(cedula.substring(0, 2));
 
