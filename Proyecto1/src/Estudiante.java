@@ -13,7 +13,7 @@ class Estudiante extends Persona {
     String direccion;
     Curso[] cursos;
 
-    public Estudiante( String direccion, Curso[] cursos, String cedula, String nombre1, String nombre2, String Apellido1, String Apellido2, int FechaNacmto) {
+    public Estudiante( String direccion, Curso[] cursos, String cedula, String nombre1, String nombre2, String Apellido1, String Apellido2, String FechaNacmto) {
         super(cedula, nombre1, nombre2, Apellido1, Apellido2, FechaNacmto);
         this.direccion = direccion;
         this.cursos = cursos;
