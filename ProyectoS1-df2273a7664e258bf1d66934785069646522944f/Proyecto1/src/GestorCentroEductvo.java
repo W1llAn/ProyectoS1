@@ -51,27 +51,30 @@ public class GestorCentroEductvo {
     int cantidadProfesores = 0;
     int cantidadEstudiantes = 0;
 
-    
-    public void registrarEstudiantes(Estudiante estudiante){
-        if(cantidadEstudiantes < this.estudiantes.length){
-            this.estudiantes[cantidadEstudiantes]=estudiante;
+    public void registrarEstudiantes(Estudiante estudiante) {
+        if (cantidadEstudiantes < this.estudiantes.length) {
+            this.estudiantes[cantidadEstudiantes] = estudiante;
             cantidadEstudiantes++;
             System.out.println("Estudiante registrado correctamente! ");
-        }else{
+        } else {
             System.out.println("No es posible registrar mas estudiantes. Se alcanzo la capacidad máxima. ");
         }
     }
 
-    public boolean cedulaRepetida(String cedula) {
-    for (int i = 0; i < estudiantes.length; i++) {
-       
-        if (estudiantes[i] != null && estudiantes[i].getCedula().equals(cedula)) {
-             System.out.println(estudiantes[i].getNombre1()+"------------------------------------");
-            return true; // La cédula ya existe en una posición válida del arreglo
+    public boolean cedulaRepetida(String Cdla) {
+        // Compruebo primero que si el vector esta vacio o lleno
+        if (profesores == null) {
+            return false;
         }
+        // itero en relacion a que ya existe datos y en esas posiciones no sea null
+        for (Profesor p : profesores) {
+            if (p != null && p.getCedula() != null && p.getCedula().equals(Cdla)) {
+                System.out.println("Cédula ya existente");
+                return true;
+            }
+        }
+        return false;
     }
-    return false; // La cédula no existe en ninguna posición válida
-}
 
     public void registrarProfesor(Profesor profesor) {
         if (cantidadProfesores < profesores.length) {
@@ -82,12 +85,14 @@ public class GestorCentroEductvo {
             System.out.println("No es posible registrar más profesores. Se alcanzó la capacidad máxima.");
         }
     }
+
     public void imprimirProfesores() {
         System.out.println("Lista de Profesores:");
         for (int i = 0; i < cantidadProfesores; i++) {
             Profesor profesor = profesores[i];
             System.out.println("Cédula: " + profesor.getCedula().toUpperCase());
-            System.out.println("Nombre: " + profesor.getNombre1().toUpperCase() + " " + profesor.getNombre2().toUpperCase()
+            System.out.println("Nombre: " + profesor.getNombre1().toUpperCase() + " "
+                    + profesor.getNombre2().toUpperCase()
                     + " " + profesor.getApellido1().toUpperCase() + " " + profesor.getApellido2().toUpperCase());
             System.out.println("Fecha de Nacimiento: " + profesor.getFechaNacmto());
             System.out.println("Años de Experiencia: " + profesor.getAñosExper());
@@ -95,18 +100,28 @@ public class GestorCentroEductvo {
             System.out.println("-----------------------------");
         }
     }
-    public void imprimirEstudiantes(){
-            System.out.println("Lista de Estudiantes:");
-            for (int i = 0; i < cantidadEstudiantes; i++) {
+
+    public void imprimirEstudiantes() {
+        System.out.println("Lista de Estudiantes:");
+        for (int i = 0; i < cantidadEstudiantes; i++) {
             Estudiante estudiante = estudiantes[i];
             System.out.println("Cédula: " + estudiante.getCedula().toUpperCase());
-            System.out.println("Nombre: " + estudiante.getNombre1().toUpperCase() + " " + estudiante.getNombre2().toUpperCase()
-                    + " " + estudiante.getApellido1().toUpperCase() + " " +estudiante.getApellido2().toUpperCase());
+            System.out.println("Nombre: " + estudiante.getNombre1().toUpperCase() + " "
+                    + estudiante.getNombre2().toUpperCase()
+                    + " " + estudiante.getApellido1().toUpperCase() + " " + estudiante.getApellido2().toUpperCase());
             System.out.println("Fecha de Nacimiento: " + estudiante.getFechaNacmto());
             System.out.println("Dirección " + estudiante.getDireccion());
             System.out.println("-----------------------------");
         }
 
     }
-    
+
+    public void ImprimirVectorProfesor() {
+        for (Profesor p : this.profesores) {
+            if (p != null) {
+                System.out.println(p.getNombre1());
+            }
+        }
+    }
+
 }

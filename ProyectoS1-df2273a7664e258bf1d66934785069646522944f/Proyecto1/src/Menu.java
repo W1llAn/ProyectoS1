@@ -26,8 +26,8 @@ public class Menu {
                     do{
                     System.out.println("Bienvenido a la opción Ingreso de Estudiantes");
                     Estudiante estudiantes = new Estudiante();
-                    PedirDatosEstudiantes(estudiantes);
-                    gestor.registrarEstudiantes(estudiantes);
+                    
+                    gestor.registrarEstudiantes(PedirDatosEstudiantes(estudiantes));
                     System.out.println("Desea registrar a un estudiante nuevo\n ¿S/N?: ");
                     opcSn = tec.Tec().next().toUpperCase().charAt(0);
                 }while (opcSn == 'S');
@@ -35,8 +35,7 @@ public class Menu {
                 case 2:
                     do {
                         Profesor prof = new Profesor();
-                        PedirDatosProfesores(prof);
-                        gestor.registrarProfesor(prof);
+                        gestor.registrarProfesor( PedirDatosProfesores(prof));
                         System.out.print("Desea Registrar un profesor nuevo\n ¿S/N?:");
                         opcSn = tec.Tec().next().toUpperCase().charAt(0);
                     } while (opcSn == 'S');
@@ -55,7 +54,8 @@ public class Menu {
                         case 1:
                             System.out.println(" ___________________________________ ");
                             System.out.println("|--------P R O F E S O R E S -------|");
-                            gestor.imprimirProfesores();
+                            //gestor.imprimirProfesores();
+                            gestor.ImprimirVectorProfesor();
                             System.out.println("|___________________________________|");
 
                             break;
