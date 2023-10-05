@@ -1,6 +1,7 @@
 import java.text.SimpleDateFormat;
 import java.text.ParseException;
 import java.util.Date;
+import java.util.InputMismatchException;
 
 public class Controles {
     public Teclado tec = new Teclado();
@@ -170,7 +171,7 @@ public class Controles {
         int id=0;
         try {
                id = tec.Tec().nextInt(); 
-           } catch (Exception e) {
+           } catch (InputMismatchException e) {
                System.out.println("Por favor ingrese solo numeros");
            }
         return id;

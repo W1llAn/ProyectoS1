@@ -122,18 +122,22 @@ public class GestorCentroEductvo {
 
 
     public Profesor eleccionProfesor(){
-     
-        System.out.println("-----Lista de Profesores-----");
-        for(int i = 0;i<this.getProfesores().length;i++){
-            System.out.println((i+1)+") "+this.getProfesores()[i].getNombre1()+this.getProfesores()[i].getApellido1());
+        if (this.getProfesores()[0]!=null) {
+            System.out.println("-----Lista de Profesores-----");
+            for(int i = 0;i<this.getProfesores().length;i++){
+                System.out.println((i+1)+") "+this.getProfesores()[i].getNombre1()+this.getProfesores()[i].getApellido1());
+            }    
+            System.out.print("Escriba el numero del profesor que desea: ");
+            int eleccion;
+            do {
+                eleccion = new Controles().controlValoresEnteros();
+            } while (eleccion>=this.getProfesores().length);      
+            Profesor p=this.getProfesores()[eleccion];    
+            return p;
+        }else{
+            System.out.println("No existen maestros ingresados");
         }
-        System.out.print("Escriba el numero del profesor que desea: ");
-        int eleccion;
-        do {
-            eleccion = new Controles().controlValoresEnteros();
-        } while (eleccion>=this.getProfesores().length);      
-        Profesor p=this.getProfesores()[eleccion];    
-        return p;
+        return null;
     }
 
 }

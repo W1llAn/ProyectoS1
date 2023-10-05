@@ -26,22 +26,24 @@ public class Menu {
                     do{
                     System.out.println("Bienvenido a la opción Ingreso de Estudiantes");
                     Estudiante estudiantes = new Estudiante();
-                    
-                    gestor.registrarEstudiantes(PedirDatosEstudiantes(estudiantes));
+                    PedirDatosEstudiantes(estudiantes);
+                    gestor.registrarEstudiantes(estudiantes);
                     System.out.println("Desea registrar a un estudiante nuevo\n ¿S/N?: ");
                     opcSn = tec.Tec().next().toUpperCase().charAt(0);
                 }while (opcSn == 'S');
                     break;
                 case 2:
-                do {
-                    Profesor prof = new Profesor();
-                    gestor.registrarProfesor( PedirDatosProfesores(prof));
-                    System.out.print("Desea Registrar un profesor nuevo\n ¿S/N?:");
-                    opcSn = tec.Tec().next().toUpperCase().charAt(0);
-                } while (opcSn == 'S');
+                    do {
+                        Profesor prof = new Profesor();
+                        PedirDatosProfesores(prof);
+                        gestor.registrarProfesor(prof);
+                        System.out.print("Desea Registrar un profesor nuevo\n ¿S/N?:");
+                        opcSn = tec.Tec().next().toUpperCase().charAt(0);
+                    } while (opcSn == 'S');
                     break;
                 case 3:
-                    System.out.println("Bienvenido a la opción 3");
+                    System.out.println("Bienvenido a la creacion del curso");
+                    this.PedirDatosCurso();
                     break;
                 case 4:
                     System.out.println("Bienvenido a la opción 4");
@@ -92,7 +94,7 @@ public class Menu {
 
     public Profesor PedirDatosProfesores(Profesor profe) {
         System.out.println("---Registro de Profesores-----");
-        profe.setCedula(ControlCedula());
+        profe.setCedula(contrls.ControlCedula());
         profe.setNombre1(contrls.Palabras("Primer Nombre: "));
         profe.setNombre2(contrls.Palabras("Segundo Nombre: "));
         profe.setApellido1(contrls.Palabras("Apellido Paterno: "));
@@ -100,92 +102,42 @@ public class Menu {
         profe.setFechaNacmto(contrls.controlFechaNacmto());
         profe.setAñosExper(contrls.ControlNumrs("Años de experiencia: "));
         profe.setSalario(contrls.ControlNumrs("Salario: "));
-        profe.setEdad(contrls.Edad(profe.getFechaNacmto()));
         return profe;
     }
 
     public Estudiante PedirDatosEstudiantes(Estudiante estudiantes) {
         System.out.println("-----Registro de Estudiantes-----");
-        estudiantes.setCedula(ControlCedula());
+        estudiantes.setCedula(contrls.ControlCedula());
         estudiantes.setNombre1(contrls.Palabras("Primer Nombre: "));
         estudiantes.setNombre2(contrls.Palabras("Segundo Nombre: "));
         estudiantes.setApellido1(contrls.Palabras("Apellido Paterno: "));
         estudiantes.setApellido2(contrls.Palabras("Apellido Materno: "));
         estudiantes.setFechaNacmto(contrls.controlFechaNacmto());
         estudiantes.setDireccion(contrls.controlarCaracteresEspeciales("Direccion: "));
-        estudiantes.setEdad(contrls.Edad(estudiantes.getFechaNacmto()));
         return estudiantes;
+    }
+    public Curso PedirDatosCurso(){
+        System.out.println("---Registro de Cursos-----");
+        System.out.print("Ingrese el identificador del curso: ");
+        int id = contrls.controlValoresEnteros();
+        String nombreC = contrls.Palabras("Ingrese el nombre del curso: ");
+        //INGRESO DE LAS HORAS DEL CURSO JUNTO CON EL CONTROL DEL MISMO--------------------   
+        int cantidadHoras=0;
+        try {  
+         do{
+            System.out.print("Ingrese la cantidad de horas del curso (maximo 40): ");
+            cantidadHoras = contrls.controlValoresEnteros();
+         }while(cantidadHoras>40);    
+        } catch (Exception e) {
+            System.out.println("Por favor ingrese solo numeros");
+        }
+        return (gestor.eleccionProfesor()!=null)?new Curso(id,nombreC,cantidadHoras,gestor.eleccionProfesor()):null;
     }
 
     public void subMenu() {
         System.out.println("\nOpciones de reportes:");
         System.out.println("1)Profesores\n2)Estudiantes");
         System.out.print("Opción:");
-    }
-    public String ControlCedula() {
-        String cedula, patron;
-        patron = "^[0-9]{10}$";
-        boolean aux = false;
-
-        do {
-            System.out.print("Cédula:");
-            cedula = tec.Tec().next();
-
-            if (cedula.matches(patron)) {
-                if (gestor.VerificarCedula(cedula) == false) {
-
-                    int primerosdos = Integer.parseInt(cedula.substring(0, 2));
-
-                    if (primerosdos >= 1 && primerosdos <= 24) {
-                        String nueveprimeros = cedula.substring(0, 9);
-                        String digitosImpares = "";
-                        String digitosPares = "";
-
-                        for (int i = 0; i < nueveprimeros.length(); i++) {
-                            char digito = nueveprimeros.charAt(i);
-                            if (i % 2 == 0) {
-                                digitosImpares += digito;
-                            } else {
-                                digitosPares += digito;
-                            }
-                        }
-
-                        int sumaImpares = 0;
-                        for (int i = 0; i < digitosImpares.length(); i++) {
-                            int digitoImpar = Character.getNumericValue(digitosImpares.charAt(i));
-                            int resultado = digitoImpar * 2;
-                            if (resultado > 9) {
-                                resultado -= 9;
-                            }
-                            sumaImpares += resultado;
-                        }
-
-                        int sumaPares = 0;
-                        for (int i = 0; i < digitosPares.length(); i++) {
-                            int digitoPar = Character.getNumericValue(digitosPares.charAt(i));
-                            sumaPares += digitoPar;
-                        }
-
-                        int sumaTotal = sumaPares + sumaImpares;
-                        int ultimoDigito = sumaTotal % 10;
-                        int numeroFinal = 10 - ultimoDigito;
-                        String ultimoDigitoCedula = cedula.substring(9);
-
-                        if (numeroFinal == Integer.parseInt(ultimoDigitoCedula)) {
-                            aux = true;
-                        } else {
-                            System.out.println("Cédula incorrecta");
-                        }
-                    } else {
-                        System.out.println("Cédula incorrecta");
-                    }
-                }
-            } else {
-                System.out.println("Cédula incorrecta (Contiene 10 números)");
-            }
-        } while (!aux);
-
-        return cedula;
     }
 
 }
