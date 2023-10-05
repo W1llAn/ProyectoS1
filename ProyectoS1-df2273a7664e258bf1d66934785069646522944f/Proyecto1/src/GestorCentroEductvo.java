@@ -35,6 +35,24 @@ public class GestorCentroEductvo {
         }
         return true;
     }
+    public boolean cedulaRepetida(String cedula){
+        boolean repet=true;
+            for (int i = 0; i < this.getProfesores().length; i++) {
+                if (this.getProfesores()[0]!=null) {
+                if (this.getProfesores()[i].getCedula().equals(cedula)) {
+                    repet = true;
+                    break;
+                }
+                else{
+                    repet = false;
+                }
+            }
+            else{
+                repet = false;
+            }
+        }
+        return repet; 
+    }
 
     void ImprimirReporteInscritos() {
         System.out.println("Reporte de personas Inscritas");
@@ -119,20 +137,66 @@ public class GestorCentroEductvo {
         }
 
     }
+    public int listaCursos(){
+        int contadorCursos=0;
+        if (this.getCursos()[0]!=null) {
+            System.out.println("-----Lista de Cursos-----");
+            for(int i = 0;i<this.getCursos().length;i++){
+                if (this.getCursos()[i]!=null) {
+                 System.out.println((i+1)+") "+this.getCursos()[i].getNombre());
+                 contadorCursos++;
+                }
+                else{
+                    System.out.println((i+1)+")----------");
+                }
+            }          
+            
+        }else{
+            System.out.println("No existen maestros ingresados");
+        }
+        return contadorCursos;
+    }
+
+    public int listaEstudiantes(){
+        int contadorEstudiantes=0;
+        if (this.getEstudiantes()[0]!=null) {
+            System.out.println("-----Lista de Estudiantes-----");
+            for(int i = 0;i<this.getProfesores().length;i++){
+                if (this.getEstudiantes()[i]!=null) {
+                 System.out.println((i+1)+") "+this.getEstudiantes()[i].getNombre1()+" "+this.getEstudiantes()[i].getApellido1());
+                 contadorEstudiantes++;
+                }
+                else{
+                    System.out.println((i+1)+")--------");
+                }
+            }          
+            
+        }else{
+            System.out.println("No existen estudiantes ingresados");
+        }
+        return contadorEstudiantes;
+    }
 
 
     public Profesor eleccionProfesor(){
+        int contadorProfesores=0;
         if (this.getProfesores()[0]!=null) {
             System.out.println("-----Lista de Profesores-----");
             for(int i = 0;i<this.getProfesores().length;i++){
-                System.out.println((i+1)+") "+this.getProfesores()[i].getNombre1()+this.getProfesores()[i].getApellido1());
+                if (this.getProfesores()[i]!=null) {
+                 System.out.println((i+1)+") "+this.getProfesores()[i].getNombre1()+" "+this.getProfesores()[i].getApellido1());
+                 contadorProfesores++;
+                }
+                else{
+                    System.out.println((i+1)+") Vacante");
+                }
             }    
             System.out.print("Escriba el numero del profesor que desea: ");
             int eleccion;
             do {
                 eleccion = new Controles().controlValoresEnteros();
-            } while (eleccion>=this.getProfesores().length);      
-            Profesor p=this.getProfesores()[eleccion];    
+            } while (eleccion>contadorProfesores || eleccion==0);      
+            Profesor p=this.getProfesores()[eleccion-1];    
             return p;
         }else{
             System.out.println("No existen maestros ingresados");
