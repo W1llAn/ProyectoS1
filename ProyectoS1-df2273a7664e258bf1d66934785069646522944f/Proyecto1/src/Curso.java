@@ -40,10 +40,10 @@ class Curso {
         this.estudiantes[posicion]=estudiante;
         return true;
     }
-    public Curso(String nombre, int CantHors, Estudiante[] estudiantes, Profesor profesores) {
+    public Curso(int id,String nombre, int CantHors, Profesor profesores) {
+        this.id= id;
         this.nombre = nombre;
         this.CantHors = CantHors;
-        this.estudiantes = estudiantes;
         this.profesores = profesores;
     }
 
