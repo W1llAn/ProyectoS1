@@ -12,7 +12,7 @@ public class GestorCentroEductvo {
     private Curso[] cursos = new Curso[10];
     private Estudiante[] estudiantes = new Estudiante[10];
     private Profesor[] profesores = new Profesor[10];
-
+   
     public Curso[] getCursos() {
         return this.cursos;
     }
@@ -107,6 +107,7 @@ public class GestorCentroEductvo {
     }
 
     public void imprimirProfesores() {
+        Controles contrls = new Controles();
         System.out.println("Lista de Profesores:");
         for (int i = 0; i < cantidadProfesores; i++) {
             Profesor profesor = profesores[i];
@@ -117,12 +118,24 @@ public class GestorCentroEductvo {
             System.out.println("Fecha de Nacimiento: " + profesor.getFechaNacmto());
             System.out.println("Años de Experiencia: " + profesor.getAñosExper());
             System.out.println("Salario: " + profesor.getSalario());
-            System.out.println("Edad "+profesor.getEdad());
+            System.out.println("Edad: "+contrls.Edad(profesor.getFechaNacmto()));
             System.out.println("-----------------------------");
         }
     }
 
+            
+    public void guardarCurso(Curso curso){
+        for (int i = 0; i < cursos.length; i++) {
+            if (this.getCursos()[i]==null) {
+                this.getCursos()[i]=curso;
+                break;
+            }
+        }
+        System.out.println("El curso ha ");
+    }
+
     public void imprimirEstudiantes() {
+    Controles contrls = new Controles();
         System.out.println("Lista de Estudiantes:");
         for (int i = 0; i < cantidadEstudiantes; i++) {
             Estudiante estudiante = estudiantes[i];
@@ -130,12 +143,29 @@ public class GestorCentroEductvo {
             System.out.println("Nombre: " + estudiante.getNombre1().toUpperCase() + " "
                     + estudiante.getNombre2().toUpperCase()
                     + " " + estudiante.getApellido1().toUpperCase() + " " + estudiante.getApellido2().toUpperCase());
-            System.out.println("Fecha de Nacimiento: " + estudiante.getFechaNacmto());
+            System.out.println("Edad: " + contrls.Edad(estudiante.getFechaNacmto()));
             System.out.println("Dirección " + estudiante.getDireccion());
-            System.out.println("Edad: "+estudiante.getEdad());
             System.out.println("-----------------------------");
         }
-
+    }
+    public void inscripcionCurso(Estudiante estudiante, Curso curso){
+        for (int i = 0; i < this.getCursos().length; i++) {
+            if (this.getCursos()[i]!=null) {
+                if (this.getCursos()[i].getId()==curso.getId()) {
+                    for (int j = 0; j < this.getCursos()[i].getEstudiantes().length; j++) {
+                        if (this.getCursos()[i].getEstudiantes()[j]==null) {
+                            this.getCursos()[i].getEstudiantes()[j]=estudiante;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    public Curso seleccionCurso(int posicion){
+        return this.getCursos()[posicion];
+    }
+    public Estudiante seleccionEstudiante(int posicion){
+        return this.getEstudiantes()[posicion];
     }
     public int listaCursos(){
         int contadorCursos=0;
@@ -152,7 +182,7 @@ public class GestorCentroEductvo {
             }          
             
         }else{
-            System.out.println("No existen maestros ingresados");
+            System.out.println("No existen cursos ingresados");
         }
         return contadorCursos;
     }
@@ -180,6 +210,7 @@ public class GestorCentroEductvo {
 
     public Profesor eleccionProfesor(){
         int contadorProfesores=0;
+        Profesor p=null;
         if (this.getProfesores()[0]!=null) {
             System.out.println("-----Lista de Profesores-----");
             for(int i = 0;i<this.getProfesores().length;i++){
@@ -196,12 +227,11 @@ public class GestorCentroEductvo {
             do {
                 eleccion = new Controles().controlValoresEnteros();
             } while (eleccion>contadorProfesores || eleccion==0);      
-            Profesor p=this.getProfesores()[eleccion-1];    
-            return p;
+            p=this.getProfesores()[eleccion-1];    
         }else{
             System.out.println("No existen maestros ingresados");
         }
-        return null;
+        return p;
     }
 
 }

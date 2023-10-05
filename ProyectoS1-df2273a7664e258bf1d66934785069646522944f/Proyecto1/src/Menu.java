@@ -18,12 +18,15 @@ public class Menu {
     public void menu() {
         char opcSn;
         do {
+            contrls.Espacios();
             Opciones();
             System.out.print("Opción:");
             op = tec.Tec().nextInt();
             switch (op) {
                 case 1:
+                    
                     do{
+                        contrls.Espacios();
                     System.out.println("Bienvenido a la opción Ingreso de Estudiantes");
                     Estudiante estudiantes = new Estudiante();
                     PedirDatosEstudiantes(estudiantes);
@@ -34,6 +37,7 @@ public class Menu {
                     break;
                 case 2:
                     do {
+                        contrls.Espacios();
                         Profesor prof = new Profesor();
                         PedirDatosProfesores(prof);
                         gestor.registrarProfesor(prof);
@@ -42,19 +46,24 @@ public class Menu {
                     } while (opcSn == 'S');
                     break;
                 case 3:
+                    contrls.Espacios();
                     System.out.println("Bienvenido a la creacion del curso");
-                    this.PedirDatosCurso();
+                    gestor.guardarCurso(this.PedirDatosCurso());
                     break;
                 case 4:
+                    contrls.Espacios();
                     System.out.println("Bienvenido a la inscripcion de cursos");
+                    this.inscripcionEstudiantes();
                     break;
                 case 5:
+                    do {
+                    contrls.Espacios();
                     System.out.println("||||||||||||||||||| R E P O R T E S ||||||||||||||||");
                     subMenu();
                     op = tec.Tec().nextInt();
                     switch (op) {
                         case 1:
-                            System.out.println(" ___________________________________ ");
+                           System.out.println(" ___________________________________ ");
                             System.out.println("|--------P R O F E S O R E S -------|");
                             gestor.imprimirProfesores();
                             System.out.println("|___________________________________|");
@@ -67,13 +76,15 @@ public class Menu {
                             System.out.println("|___________________________________|");
                             break;
                     }
-
+                 } while (op !=3);
                     break;
                 case 6:
+                    contrls.Espacios();
                     System.out.println("-----------Estudiantes en un curso-----------");
                     gestor.ImprimirReporteInscritos();
                     break;
                 case 7:
+                    contrls.Espacios();
                     System.out.println("Buen día");
                     System.exit(0);
                     break;
@@ -100,7 +111,7 @@ public class Menu {
         profe.setApellido1(contrls.Palabras("Apellido Paterno: "));
         profe.setApellido2(contrls.Palabras("Apellido Materno: "));
         profe.setFechaNacmto(contrls.controlFechaNacmto());
-        profe.setAñosExper(contrls.ControlNumrs("Años de experiencia: "));
+        profe.setAñosExper(contrls.AñosExperiencia(profe.getFechaNacmto(),"Años de experiencia: "));
         profe.setSalario(contrls.ControlNumrs("Salario: "));
         return profe;
     }
@@ -116,43 +127,54 @@ public class Menu {
         estudiantes.setDireccion(contrls.controlarCaracteresEspeciales("Direccion: "));
         return estudiantes;
     }
-    public Curso PedirDatosCurso(){
+
+    public Curso PedirDatosCurso() {
         System.out.println("---Registro de Cursos-----");
         System.out.print("Ingrese el identificador del curso: ");
         int id = contrls.controlValoresEnteros();
         String nombreC = contrls.Palabras("Ingrese el nombre del curso: ");
-        //INGRESO DE LAS HORAS DEL CURSO JUNTO CON EL CONTROL DEL MISMO--------------------   
-        int cantidadHoras=0;
-        try {  
-         do{
-            System.out.print("Ingrese la cantidad de horas del curso (maximo 40): ");
-            cantidadHoras = contrls.controlValoresEnteros();
-         }while(cantidadHoras>40);    
+        // INGRESO DE LAS HORAS DEL CURSO JUNTO CON EL CONTROL DEL
+        // MISMO--------------------
+        int cantidadHoras = 0;
+        try {
+            do {
+                System.out.print("Ingrese la cantidad de horas del curso (maximo 40): ");
+                cantidadHoras = contrls.controlValoresEnteros();
+            } while (cantidadHoras > 40);
         } catch (Exception e) {
             System.out.println("Por favor ingrese solo numeros");
         }
-        return (gestor.eleccionProfesor()!=null)?new Curso(id,nombreC,cantidadHoras,gestor.eleccionProfesor()):null;
+        Profesor pro=gestor.eleccionProfesor();
+        return (pro != null) ? new Curso(id, nombreC, cantidadHoras,pro): null;
     }
 
-    public void inscripcionEstudiantes(){
-        int seleccionProfesor=0,seleccionEstudiante=0,cantProfe=0,cantEstd=0;
-        cantProfe=gestor.listaCursos();
-        do {
-            System.out.println("Ingrese la opcion: ");
-            seleccionProfesor= tec.Tec().nextInt();
-        } while (seleccionProfesor>cantProfe);       
-        cantEstd=gestor.listaEstudiantes();
-        do {
-            System.out.println("Ingrese la opcion: ");
-            seleccionEstudiante= tec.Tec().nextInt();
-        } while (seleccionEstudiante>cantEstd);
+    public void inscripcionEstudiantes() {
+        int seleccionCurso = 0, seleccionEstudiante = 0, cantCurso = 0, cantEstd = 0;
+        Estudiante est;
+        Curso curso;
+        cantCurso = gestor.listaCursos();
+        if (cantCurso != 0) {
+            do {
+                seleccionCurso=this.contrls.ControlNumrs("Ingrese una opcion: ");        
+            } while (seleccionCurso > cantCurso);
+            curso = gestor.seleccionCurso(seleccionCurso);
+            cantEstd = gestor.listaEstudiantes();
+            if (cantEstd!=0) {
+                do {
+                seleccionEstudiante = this.contrls.ControlNumrs("Ingrese una opcion: ");
+                } while (seleccionEstudiante > cantEstd);
+                est=this.gestor.seleccionEstudiante(cantEstd);
+                gestor.inscripcionCurso(est, curso);
+            }            
+        }
     }
 
     public void subMenu() {
         System.out.println("\nOpciones de reportes:");
-        System.out.println("1)Profesores\n2)Estudiantes");
+        System.out.println("1)Profesores\n2)Estudiantes\n3)Volver");
         System.out.print("Opción:");
     }
+
     public String ControlCedula() {
         String cedula, patron;
         patron = "^[0-9]{10}$";

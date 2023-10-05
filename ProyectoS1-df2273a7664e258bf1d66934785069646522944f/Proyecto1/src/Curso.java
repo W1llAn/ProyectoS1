@@ -15,10 +15,11 @@ class Curso {
     public String getNombre(){
         return this.nombre;
     }
+
     public int getCantHours(){
         return this.CantHors;
     }
-    public int id(){
+    public int getId(){
         return this.id;
     }
     public Estudiante[] getEstudiantes(){

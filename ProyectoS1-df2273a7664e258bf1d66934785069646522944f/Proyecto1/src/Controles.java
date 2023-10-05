@@ -33,9 +33,7 @@ public class Controles {
         return palabra;
     }
 
-   
-
-        public Date obtenerFechaNacimiento() {
+    public Date obtenerFechaNacimiento() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         dateFormat.setLenient(false);
         String inputDate;
@@ -72,21 +70,21 @@ public class Controles {
         int diaNac = Integer.parseInt(partesFecha[0]);
         int mesNac = Integer.parseInt(partesFecha[1]);
         int anioNac = Integer.parseInt(partesFecha[2]);
-            Date fecha = new Date();
-            int dia, mes, anio, anioCal;
-                dia = fecha.getDate();
-                mes = fecha.getMonth() + 1;
-                anio = fecha.getYear() + 1900;
-                anioCal = anio - anioNac;
-                if (mes <= mesNac) {
-                    if (mes == mesNac) {
-                        if (diaNac > dia) {
-                            anioCal++;
-                        }
-                    }
+        Date fecha = new Date();
+        int dia, mes, anio, anioCal;
+        dia = fecha.getDate();
+        mes = fecha.getMonth() + 1;
+        anio = fecha.getYear() + 1900;
+        anioCal = anio - anioNac;
+        if (mes <= mesNac) {
+            if (mes == mesNac) {
+                if (diaNac > dia) {
+                    anioCal++;
                 }
-                return anioCal;
             }
+        }
+        return anioCal;
+    }
 
     public int ControlNumrs(String mensaje) {
         String patron, num;
@@ -100,15 +98,58 @@ public class Controles {
         return Integer.parseInt(num);
     }
 
-    //CONTROL PARA EL IDENTIFICADOR-----------------------------------
-    public int controlValoresEnteros(){
-        int id=0;
+    // CONTROL PARA EL IDENTIFICADOR-----------------------------------
+    public int controlValoresEnteros() {
+        int id = 0;
         try {
-               id = tec.Tec().nextInt(); 
-           } catch (InputMismatchException e) {
-               System.out.println("Por favor ingrese solo numeros");
-           }
+            id = tec.Tec().nextInt();
+        } catch (InputMismatchException e) {
+            System.out.println("Por favor ingrese solo numeros");
+        }
         return id;
     }
-    
+
+    public void Espacios() {
+        for (int i = 1; i <= 40; i++) {
+            System.out.println(" ");
+        }
+    }
+
+    public int AñosExperiencia(String fechaNacmiento, String mensaje) {
+        boolean aux = true;
+        String patron, num;
+         int añosExpp;
+        patron = "^[0-9]+$";
+        do {
+            do {
+                System.out.print(mensaje);
+                num = tec.Tec().next();
+                if (!num.matches(patron)) {
+                }
+            } while (!num.matches(patron));
+            añosExpp = Integer.parseInt(num);
+            String[] partesFecha = fechaNacmiento.split("/");
+            int anioNac = Integer.parseInt(partesFecha[2]);
+            int diaNac = Integer.parseInt(partesFecha[0]);
+            int mesNac = Integer.parseInt(partesFecha[1]);
+            Date fecha = new Date();
+            int dia, mes, anio, anioCal;
+            dia = fecha.getDate();
+            mes = fecha.getMonth() + 1;
+            anio = fecha.getYear() + 1900;
+            anioCal = anio - anioNac;
+            if (mes <= mesNac) {
+                if (mes == mesNac) {
+                    if (diaNac > dia) {
+                        anioCal++;
+                    }
+                }
+            }
+            if (añosExpp > (anioCal - 18)) {
+                System.out.println("Ingrese sus años de experiencia verdaderos");
+                aux = false;
+            }
+        } while ((!aux));
+        return añosExpp;
+    }
 }
