@@ -61,21 +61,23 @@ public class GestorCentroEductvo {
         }
     }
 
-    public boolean cedulaRepetida(String Cdla) {
+    public boolean VerificarCedula(String Cdla) {
         // Compruebo primero que si el vector esta vacio o lleno
-        if (profesores == null) {
+        if (profesores == null || estudiantes == null) {
             return false;
         }
-        // itero en relacion a que ya existe datos y en esas posiciones no sea null
+        //itero en relacion a que ya existe datos y en esas posiciones no sea null
         for (Profesor p : profesores) {
-            if (p != null && p.getCedula() != null && p.getCedula().equals(Cdla)) {
-                System.out.println("Cédula ya existente");
-                return true;
+            for (Estudiante e : estudiantes) {
+
+                if (p != null && p.getCedula() != null && p.getCedula().equals(Cdla) || e != null && e.getCedula() != null && e.getCedula().equals(Cdla)) {
+                    System.out.println("Cédula ya existente");
+                    return true;
+                }
             }
         }
         return false;
     }
-
     public void registrarProfesor(Profesor profesor) {
         if (cantidadProfesores < profesores.length) {
             profesores[cantidadProfesores] = profesor;
