@@ -33,13 +33,11 @@ public class Controles {
 
    
 
-    public String controlFechaNacmto() {
+        public Date obtenerFechaNacimiento() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         dateFormat.setLenient(false);
-
         String inputDate;
         Date date = null;
-
         // Bucle hasta que se ingrese una fecha válida
         while (date == null) {
             System.out.print("Ingrese su fecha de nacimiento (formato dd/MM/yyyy): ");
@@ -57,8 +55,36 @@ public class Controles {
             }
         }
 
-        return dateFormat.format(date);
+        return date;
     }
+
+    public String controlFechaNacmto() {
+        Date fechaNacimiento = obtenerFechaNacimiento();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        return dateFormat.format(fechaNacimiento);
+    }
+
+    public int Edad(String fechaNac) {
+        // Dividir la fecha formateada en día, mes y año
+        String[] partesFecha = fechaNac.split("/");
+        int diaNac = Integer.parseInt(partesFecha[0]);
+        int mesNac = Integer.parseInt(partesFecha[1]);
+        int anioNac = Integer.parseInt(partesFecha[2]);
+            Date fecha = new Date();
+            int dia, mes, anio, anioCal;
+                dia = fecha.getDate();
+                mes = fecha.getMonth() + 1;
+                anio = fecha.getYear() + 1900;
+                anioCal = anio - anioNac;
+                if (mes <= mesNac) {
+                    if (mes == mesNac) {
+                        if (diaNac > dia) {
+                            anioCal++;
+                        }
+                    }
+                }
+                return anioCal;
+            }
 
     public int ControlNumrs(String mensaje) {
         String patron, num;
@@ -71,4 +97,5 @@ public class Controles {
         } while (!num.matches(patron));
         return Integer.parseInt(num);
     }
+    
 }

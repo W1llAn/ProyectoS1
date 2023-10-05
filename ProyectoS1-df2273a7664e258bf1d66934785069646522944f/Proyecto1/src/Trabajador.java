@@ -15,9 +15,9 @@ public class Trabajador extends Persona {
         super();
     }
 
-    public Trabajador(float salario, String cedula, String nombre1, String nombre2, String Apellido1, String Apellido2,
+    public Trabajador(int edad,float salario, String cedula, String nombre1, String nombre2, String Apellido1, String Apellido2,
             String FechaNacmto) {
-        super(cedula, nombre1, nombre2, Apellido1, Apellido2, FechaNacmto);
+        super(edad,cedula, nombre1, nombre2, Apellido1, Apellido2, FechaNacmto);
         this.salario = salario;
     }
 

@@ -54,8 +54,7 @@ public class Menu {
                         case 1:
                             System.out.println(" ___________________________________ ");
                             System.out.println("|--------P R O F E S O R E S -------|");
-                            //gestor.imprimirProfesores();
-                            gestor.ImprimirVectorProfesor();
+                            gestor.imprimirProfesores();
                             System.out.println("|___________________________________|");
 
                             break;
@@ -101,6 +100,7 @@ public class Menu {
         profe.setFechaNacmto(contrls.controlFechaNacmto());
         profe.setAñosExper(contrls.ControlNumrs("Años de experiencia: "));
         profe.setSalario(contrls.ControlNumrs("Salario: "));
+        profe.setEdad(contrls.Edad(profe.getFechaNacmto()));
         return profe;
     }
 
@@ -113,6 +113,7 @@ public class Menu {
         estudiantes.setApellido2(contrls.Palabras("Apellido Materno: "));
         estudiantes.setFechaNacmto(contrls.controlFechaNacmto());
         estudiantes.setDireccion(contrls.controlarCaracteresEspeciales("Direccion: "));
+        estudiantes.setEdad(contrls.Edad(estudiantes.getFechaNacmto()));
         return estudiantes;
     }
 

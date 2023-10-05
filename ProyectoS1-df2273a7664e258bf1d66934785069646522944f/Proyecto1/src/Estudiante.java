@@ -9,12 +9,12 @@
  */
 class Estudiante extends Persona {
 
-    float promCalifi;
-    String direccion;
+    private float promCalifi;
+    private String direccion;
     Curso[] cursos;
 
-    public Estudiante( String direccion, Curso[] cursos, String cedula, String nombre1, String nombre2, String Apellido1, String Apellido2, String FechaNacmto) {
-        super(cedula, nombre1, nombre2, Apellido1, Apellido2, FechaNacmto);
+    public Estudiante( int edad,String direccion, Curso[] cursos, String cedula, String nombre1, String nombre2, String Apellido1, String Apellido2, String FechaNacmto) {
+        super(edad,cedula, nombre1, nombre2, Apellido1, Apellido2, FechaNacmto);
         this.direccion = direccion;
         this.cursos = cursos;
     }
@@ -37,7 +37,7 @@ class Estudiante extends Persona {
     public void setDireccion(String direccion) {
         this.direccion = direccion;
     }
-
+    
     public Curso[] getCursos() {
         return this.cursos;
     }

@@ -99,6 +99,7 @@ public class GestorCentroEductvo {
             System.out.println("Fecha de Nacimiento: " + profesor.getFechaNacmto());
             System.out.println("Años de Experiencia: " + profesor.getAñosExper());
             System.out.println("Salario: " + profesor.getSalario());
+            System.out.println("Edad "+profesor.getEdad());
             System.out.println("-----------------------------");
         }
     }
@@ -113,17 +114,10 @@ public class GestorCentroEductvo {
                     + " " + estudiante.getApellido1().toUpperCase() + " " + estudiante.getApellido2().toUpperCase());
             System.out.println("Fecha de Nacimiento: " + estudiante.getFechaNacmto());
             System.out.println("Dirección " + estudiante.getDireccion());
+            System.out.println("Edad: "+estudiante.getEdad());
             System.out.println("-----------------------------");
         }
 
-    }
-
-    public void ImprimirVectorProfesor() {
-        for (Profesor p : this.profesores) {
-            if (p != null) {
-                System.out.println(p.getNombre1());
-            }
-        }
     }
 
 }
