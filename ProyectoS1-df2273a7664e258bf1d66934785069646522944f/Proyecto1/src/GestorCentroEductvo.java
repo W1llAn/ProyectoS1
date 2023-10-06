@@ -54,14 +54,6 @@ public class GestorCentroEductvo {
         return repet; 
     }
 
-    void ImprimirReporteInscritos() {
-        System.out.println("Reporte de personas Inscritas");
-        for (Curso p : cursos) {
-            if (p != null) {
-            }
-        }
-    }
-
     void imprimirPersonas() {
         System.out.println("Reporte de Personas");
     }
