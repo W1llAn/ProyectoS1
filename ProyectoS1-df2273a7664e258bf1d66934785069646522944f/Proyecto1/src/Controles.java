@@ -1,7 +1,6 @@
 import java.text.SimpleDateFormat;
 import java.text.ParseException;
 import java.util.Date;
-import java.util.InputMismatchException;
 
 public class Controles {
     public Teclado tec = new Teclado();
@@ -104,45 +103,21 @@ public class Controles {
         }
     }
 
-
     public int AñosExperiencia(String fechaNacmiento, String mensaje) {
         boolean aux = true;
-        String patron, num="";
-         int añosExpp;
-        patron = "^[0-9]+$";
+        String num = "";
+        int añosExpp;
         do {
-            do {
-                System.out.print(mensaje);
-                num = tec.Tec().next();
-                if (!num.matches(patron)) {
-                }
-            } while (!num.matches(patron));
+            añosExpp=ControlNumrs(mensaje);
             añosExpp = Integer.parseInt(num);
-            String[] partesFecha = fechaNacmiento.split("/");
-            int anioNac = Integer.parseInt(partesFecha[2]);
-            int diaNac = Integer.parseInt(partesFecha[0]);
-            int mesNac = Integer.parseInt(partesFecha[1]);
-            Date fecha = new Date();
-            int dia, mes, anio, anioCal;
-            dia = fecha.getDate();
-            mes = fecha.getMonth() + 1;
-            anio = fecha.getYear() + 1900;
-            anioCal = anio - anioNac;
-            if (mes <= mesNac) {
-                if (mes == mesNac) {
-                    if (diaNac > dia) {
-                        anioCal++;
-                    }
-                }
-            }
+            int anioCal = Edad(fechaNacmiento);
             if (añosExpp > (anioCal - 18)) {
                 System.out.println("Ingrese sus años de experiencia verdaderos");
                 aux = false;
-            }else{
-                //System.out.println("siga");
-                aux=true;
+            } else {
+                      aux = true;
             }
-        } while ((aux==false));
+        } while ((aux == false));
         return añosExpp;
     }
 }
