@@ -7,7 +7,7 @@
  *
  * @author ASUS
  */
-class Curso {
+class Curso implements Comparable<Curso>{
     private String nombre;
     private int CantHors,id;
     private Estudiante[] estudiantes= new Estudiante[40];
@@ -56,6 +56,12 @@ class Curso {
         this.profesores = profesores;
     }
 
-  
+   @Override
+    public int compareTo(Curso c){
+        if(c == null){
+            return 1;
+        }
+        return this.nombre.compareTo(c.nombre);
+    }
 
 }

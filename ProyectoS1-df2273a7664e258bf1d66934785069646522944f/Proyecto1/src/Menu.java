@@ -7,7 +7,7 @@
  *
  * @author ASUS
  */
-public class Menu {
+public class Menu implements Comparable<Curso>{
     int op, fechNacmto, aniosExp, salario;
     String cedula, nom1, nom2, apelldo1, apelldo2, direccion;
     char opcSn;
@@ -92,6 +92,9 @@ public class Menu {
                     }while (opcSn == 'S');                 
                     break;
                 case 7:
+                    
+                break;
+                case 8:
                     contrls.Espacios();
                     System.out.println("\"QUE TENGA UN EXCELENTE DIA\"\n\"Saludos\"");
                     System.exit(0);
@@ -99,7 +102,7 @@ public class Menu {
                 default:
                     System.out.println("Opción Incorrecta");
             }
-        } while (op != 7);
+        } while (op != 8);
     }
 
     public void Opciones() {
@@ -108,7 +111,7 @@ public class Menu {
                 + "2)Profesores\n3)Crear cursos"
                 + "\n4)Incripción de estudiantes en cursos"
                 + "\n\"REPORTES\"\n5)Estudiantes y profesores "
-                + "\n6)Estudiantes inscritos en un curso\n7)Salir");
+                + "\n6)Estudiantes inscritos en un curso\n7)Lista Cursos y cupos\n8)Salir");
     }
 
     public Profesor PedirDatosProfesores(Profesor profe) {
@@ -135,6 +138,7 @@ public class Menu {
         estudiantes.setDireccion(contrls.controlarCaracteresEspeciales("Direccion: "));
         return estudiantes;
     }
+   
 
     public Curso PedirDatosCurso() {
         System.out.println("---Registro de Cursos-----");
@@ -256,5 +260,6 @@ public class Menu {
 
         return cedula;
     }
+
 
 }
