@@ -98,17 +98,6 @@ public class Controles {
         return Integer.parseInt(num);
     }
 
-    // CONTROL PARA EL IDENTIFICADOR-----------------------------------
-    public int controlValoresEnteros() {
-        int id = 0;
-        try {
-            id = tec.Tec().nextInt();
-        } catch (InputMismatchException e) {
-            System.out.println("Por favor ingrese solo numeros");
-        }
-        return id;
-    }
-
     public void Espacios() {
         for (int i = 1; i <= 40; i++) {
             System.out.println(" ");

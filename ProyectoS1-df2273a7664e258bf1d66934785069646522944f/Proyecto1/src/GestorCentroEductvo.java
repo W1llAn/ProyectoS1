@@ -122,7 +122,19 @@ public class GestorCentroEductvo {
             System.out.println("-----------------------------");
         }
     }
-
+    public boolean idRepetido(int id){
+        boolean repet=false;
+            for (int i = 0; i < this.getCursos().length; i++) {
+                if (this.getCursos()[i]!=null) {
+                    if (this.getCursos()[i].getId()==id) {
+                    repet=true;
+                    System.out.println("Identificador del curso existente pruebe otro mas");
+                    break;
+                    }
+                } 
+            }
+        return repet;
+    }
             
     public void guardarCurso(Curso curso){
         for (int i = 0; i < cursos.length; i++) {
@@ -131,7 +143,17 @@ public class GestorCentroEductvo {
                 break;
             }
         }
-        System.out.println("El curso ha ");
+        System.out.println("El curso ha guardado con éxito \n ");
+    }
+    public void estudiantesInscritos(int posicion){
+        System.out.println("\n------"+this.getCursos()[posicion].getNombre()+"----------");
+        System.out.println("Profesor Asignado: "+this.getCursos()[posicion].getProfesor().getNombre1());
+        for (int i = 0; i < this.getCursos()[posicion].getEstudiantes().length; i++) {
+            if (this.getCursos()[posicion].getEstudiantes()[i]!=null) {
+                 System.out.println((i+1)+")"+this.getCursos()[posicion].getEstudiantes()[i].getNombre1()+" "+this.getCursos()[posicion].getEstudiantes()[i].getApellido1());
+            }
+        }
+        System.out.println(" ");
     }
 
     public void imprimirEstudiantes() {
@@ -148,6 +170,33 @@ public class GestorCentroEductvo {
             System.out.println("-----------------------------");
         }
     }
+
+    public boolean existenciaEstudiantes(int posicionC, int posicionE){
+        boolean verif=true;
+        int comprobador=0;
+        String cedula;
+        if ( this.getEstudiantes()[posicionE]!=null) {
+            cedula = this.getEstudiantes()[posicionE].getCedula();
+            for (int j = 0; j < this.getCursos()[posicionC].getEstudiantes().length; j++) {
+                if (this.getCursos()[posicionC].getEstudiantes()[j]!=null) {
+                    System.out.println(this.getCursos()[posicionC].getEstudiantes()[j].getCedula());
+                    if (this.getCursos()[posicionC].getEstudiantes()[j].getCedula().equals(cedula)) {
+                    System.out.println("El estudiante está ya registrado en curso");
+                    comprobador++;
+                    break;
+                    }
+                }  
+            }
+        }else{
+            System.out.println("Posicion nula");
+            verif=false;
+        }
+            
+        if (comprobador==0) {
+            verif=false;
+        }
+        return verif;
+    }
     public void inscripcionCurso(Estudiante estudiante, Curso curso){
         for (int i = 0; i < this.getCursos().length; i++) {
             if (this.getCursos()[i]!=null) {
@@ -155,6 +204,7 @@ public class GestorCentroEductvo {
                     for (int j = 0; j < this.getCursos()[i].getEstudiantes().length; j++) {
                         if (this.getCursos()[i].getEstudiantes()[j]==null) {
                             this.getCursos()[i].getEstudiantes()[j]=estudiante;
+                            break;
                         }
                     }
                 }
@@ -222,10 +272,9 @@ public class GestorCentroEductvo {
                     System.out.println((i+1)+") Vacante");
                 }
             }    
-            System.out.print("Escriba el numero del profesor que desea: ");
             int eleccion;
             do {
-                eleccion = new Controles().controlValoresEnteros();
+                eleccion = new Controles().ControlNumrs("Escriba el numero del profesor que desea asignar el curso: ");
             } while (eleccion>contadorProfesores || eleccion==0);      
             p=this.getProfesores()[eleccion-1];    
         }else{

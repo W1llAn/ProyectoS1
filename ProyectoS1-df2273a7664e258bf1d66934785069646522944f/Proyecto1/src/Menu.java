@@ -81,7 +81,15 @@ public class Menu {
                 case 6:
                     contrls.Espacios();
                     System.out.println("-----------Estudiantes en un curso-----------");
-                    gestor.ImprimirReporteInscritos();
+                    do{
+                        int contCursos = gestor.listaCursos(),posicion=0;
+                        do {
+                            posicion = contrls.ControlNumrs("Ingrese el numero del curso del que desea ver los estudiantes: ");
+                        } while (posicion>contCursos);
+                        gestor.estudiantesInscritos(posicion-1);
+                        System.out.print("Desea ver mas cursos? S/N: ");
+                        opcSn = tec.Tec().next().toUpperCase().charAt(0);
+                    }while (opcSn == 'S');                 
                     break;
                 case 7:
                     contrls.Espacios();
@@ -130,16 +138,17 @@ public class Menu {
 
     public Curso PedirDatosCurso() {
         System.out.println("---Registro de Cursos-----");
-        System.out.print("Ingrese el identificador del curso: ");
-        int id = contrls.controlValoresEnteros();
+        int id;
+        do {
+        id = contrls.ControlNumrs("Ingrese el identificador del curso: ");    
+        } while (gestor.idRepetido(id));
         String nombreC = contrls.Palabras("Ingrese el nombre del curso: ");
         // INGRESO DE LAS HORAS DEL CURSO JUNTO CON EL CONTROL DEL
         // MISMO--------------------
         int cantidadHoras = 0;
         try {
             do {
-                System.out.print("Ingrese la cantidad de horas del curso (maximo 40): ");
-                cantidadHoras = contrls.controlValoresEnteros();
+                cantidadHoras = contrls.ControlNumrs("Ingrese la cantidad de horas del curso (maximo 40): ");
             } while (cantidadHoras > 40);
         } catch (Exception e) {
             System.out.println("Por favor ingrese solo numeros");
@@ -149,6 +158,7 @@ public class Menu {
     }
 
     public void inscripcionEstudiantes() {
+        boolean exist;
         int seleccionCurso = 0, seleccionEstudiante = 0, cantCurso = 0, cantEstd = 0;
         Estudiante est;
         Curso curso;
@@ -157,14 +167,20 @@ public class Menu {
             do {
                 seleccionCurso=this.contrls.ControlNumrs("Ingrese una opcion: ");        
             } while (seleccionCurso > cantCurso);
-            curso = gestor.seleccionCurso(seleccionCurso);
+            curso = gestor.seleccionCurso(seleccionCurso-1);
             cantEstd = gestor.listaEstudiantes();
             if (cantEstd!=0) {
                 do {
                 seleccionEstudiante = this.contrls.ControlNumrs("Ingrese una opcion: ");
-                } while (seleccionEstudiante > cantEstd);
-                est=this.gestor.seleccionEstudiante(cantEstd);
-                gestor.inscripcionCurso(est, curso);
+                exist=gestor.existenciaEstudiantes(seleccionCurso-1, seleccionEstudiante-1);
+                if (exist&&cantEstd==1) {
+                    break;
+                }
+                } while (seleccionEstudiante > cantEstd && exist);
+                est=this.gestor.seleccionEstudiante(seleccionEstudiante-1);
+                if (!exist) {
+                    gestor.inscripcionCurso(est, curso);    
+                }
             }            
         }
     }
