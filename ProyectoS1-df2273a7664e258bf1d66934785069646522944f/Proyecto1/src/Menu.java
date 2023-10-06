@@ -57,23 +57,23 @@ public class Menu {
                     break;
                 case 5:
                     do {
-                    contrls.Espacios();
                     System.out.println("||||||||||||||||||| R E P O R T E S ||||||||||||||||");
                     subMenu();
                     op = tec.Tec().nextInt();
                     switch (op) {
                         case 1:
+                        contrls.Espacios();
                            System.out.println(" ___________________________________ ");
                             System.out.println("|--------P R O F E S O R E S -------|");
                             gestor.imprimirProfesores();
-                            System.out.println("|___________________________________|");
-
+                            System.out.println("|___________________________________|\n");
                             break;
                         case 2:
+                        contrls.Espacios();
                             System.out.println("|-----------------------------------|");
                             System.out.println("|--------E S T U D I A N T E S -----|");
                             gestor.imprimirEstudiantes();
-                            System.out.println("|___________________________________|");
+                            System.out.println("|___________________________________|\n");
                             break;
                     }
                  } while (op !=3);
@@ -85,7 +85,7 @@ public class Menu {
                     break;
                 case 7:
                     contrls.Espacios();
-                    System.out.println("Buen día");
+                    System.out.println("\"QUE TENGA UN EXCELENTE DIA\"\n\"Saludos\"");
                     System.exit(0);
                     break;
                 default:
@@ -95,12 +95,12 @@ public class Menu {
     }
 
     public void Opciones() {
-        System.out.println("------U T A---------");
-        System.out.println("1)Registro de estudiantes\n"
-                + "2)Registro de profesores\n3)Crear cursos"
+        System.out.println("-----------U T A-----------");
+        System.out.println("\"REGISTRO\"\n1)Estudiantes\n"
+                + "2)Profesores\n3)Crear cursos"
                 + "\n4)Incripción de estudiantes en cursos"
-                + "\n------REPORTES----\n5)Estudiantes y profesores "
-                + "\n6)Estudiantes en un curso\n7)Salir");
+                + "\n\"REPORTES\"\n5)Estudiantes y profesores "
+                + "\n6)Estudiantes inscritos en un curso\n7)Salir");
     }
 
     public Profesor PedirDatosProfesores(Profesor profe) {

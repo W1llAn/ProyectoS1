@@ -108,7 +108,7 @@ public class GestorCentroEductvo {
 
     public void imprimirProfesores() {
         Controles contrls = new Controles();
-        System.out.println("Lista de Profesores:");
+        System.out.println("Lista de Profesores");
         for (int i = 0; i < cantidadProfesores; i++) {
             Profesor profesor = profesores[i];
             System.out.println("Cédula: " + profesor.getCedula().toUpperCase());
@@ -117,7 +117,7 @@ public class GestorCentroEductvo {
                     + " " + profesor.getApellido1().toUpperCase() + " " + profesor.getApellido2().toUpperCase());
             System.out.println("Fecha de Nacimiento: " + profesor.getFechaNacmto());
             System.out.println("Años de Experiencia: " + profesor.getAñosExper());
-            System.out.println("Salario: " + profesor.getSalario());
+            System.out.println("Salario: " + profesor.getSalario()+" $");
             System.out.println("Edad: "+contrls.Edad(profesor.getFechaNacmto()));
             System.out.println("-----------------------------");
         }
@@ -136,7 +136,7 @@ public class GestorCentroEductvo {
 
     public void imprimirEstudiantes() {
     Controles contrls = new Controles();
-        System.out.println("Lista de Estudiantes:");
+        System.out.println("Lista de Estudiantes");
         for (int i = 0; i < cantidadEstudiantes; i++) {
             Estudiante estudiante = estudiantes[i];
             System.out.println("Cédula: " + estudiante.getCedula().toUpperCase());
@@ -144,7 +144,7 @@ public class GestorCentroEductvo {
                     + estudiante.getNombre2().toUpperCase()
                     + " " + estudiante.getApellido1().toUpperCase() + " " + estudiante.getApellido2().toUpperCase());
             System.out.println("Edad: " + contrls.Edad(estudiante.getFechaNacmto()));
-            System.out.println("Dirección " + estudiante.getDireccion());
+            System.out.println("Dirección: " + estudiante.getDireccion());
             System.out.println("-----------------------------");
         }
     }

@@ -117,7 +117,7 @@ public class Controles {
 
     public int AñosExperiencia(String fechaNacmiento, String mensaje) {
         boolean aux = true;
-        String patron, num;
+        String patron, num="";
          int añosExpp;
         patron = "^[0-9]+$";
         do {
@@ -148,8 +148,11 @@ public class Controles {
             if (añosExpp > (anioCal - 18)) {
                 System.out.println("Ingrese sus años de experiencia verdaderos");
                 aux = false;
+            }else{
+                //System.out.println("siga");
+                aux=true;
             }
-        } while ((!aux));
+        } while ((aux==false));
         return añosExpp;
     }
 }
