@@ -15,7 +15,15 @@ class Curso {
     public String getNombre(){
         return this.nombre;
     }
-
+    public int cupo(int id){
+        int cuposLlenos=0;
+        for (int i = 0; i < estudiantes.length; i++) {
+            if (estudiantes[i]!=null) {
+                cuposLlenos++;
+            }
+        }
+        return estudiantes.length-cuposLlenos;
+    }
     public int getCantHours(){
         return this.CantHors;
     }

@@ -10,10 +10,21 @@
 public class Profesor extends Trabajador {
 
     private int añosExper;
-    private Curso[] cursos;
+    private Curso[] cursos= new Curso[5];
 
     public Profesor() {
         super();
+    }
+    public Curso[] getCursos(){
+        return cursos;
+    }
+    public void setCursos(Curso curso){
+        for (int i = 0; i < cursos.length; i++) {
+            if (cursos[i]==null) {
+                cursos[i]= curso;
+                break;
+            }
+        }
     }
 
     public Profesor(int añosExper) {
@@ -35,8 +46,4 @@ public class Profesor extends Trabajador {
     }
 
 
-    @Override
-    public String toString() {
-        return "Profesor\n" + super.toString() + "\n-Años Experiencia:" + this.añosExper;
-    }
 }

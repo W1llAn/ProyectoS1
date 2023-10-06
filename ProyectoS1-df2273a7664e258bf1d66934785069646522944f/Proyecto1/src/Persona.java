@@ -78,10 +78,6 @@ class Persona {
         this.FechaNacmto = FechaNacmto;
     }
     
-    public String nomApell() {
-        return this.Apellido1 + " " + this.Apellido2
-                + " " + this.nombre1 + " " + this.Apellido2;
-    }
     public int getEdad() {
         return this.edad;
     }
@@ -90,12 +86,7 @@ class Persona {
         this.edad = edad;
     }
 
-    /*@Override
-    public String toString() {
-        return "Cédula:" + this.cedula
-                + "\nNombres y Apellidos:" + nomApell()
-                + "\nEdad:" + Edad(12, 12, 12);
-    }*/
+    
             
             
 

@@ -12,7 +12,7 @@ public class GestorCentroEductvo {
     private Curso[] cursos = new Curso[10];
     private Estudiante[] estudiantes = new Estudiante[10];
     private Profesor[] profesores = new Profesor[10];
-   
+
     public Curso[] getCursos() {
         return this.cursos;
     }
@@ -27,31 +27,6 @@ public class GestorCentroEductvo {
 
     public void creacionCursos(Curso curso) {
 
-    }
-
-    public boolean matriculaEstudiantes(Estudiante estudiante) {
-        for (int i = 0; i < this.getProfesores().length; i++) {
-
-        }
-        return true;
-    }
-    public boolean cedulaRepetida(String cedula){
-        boolean repet=true;
-            for (int i = 0; i < this.getProfesores().length; i++) {
-                if (this.getProfesores()[0]!=null) {
-                if (this.getProfesores()[i].getCedula().equals(cedula)) {
-                    repet = true;
-                    break;
-                }
-                else{
-                    repet = false;
-                }
-            }
-            else{
-                repet = false;
-            }
-        }
-        return repet; 
     }
 
     void imprimirPersonas() {
@@ -76,11 +51,12 @@ public class GestorCentroEductvo {
         if (profesores == null || estudiantes == null) {
             return false;
         }
-        //itero en relacion a que ya existe datos y en esas posiciones no sea null
+        // itero en relacion a que ya existe datos y en esas posiciones no sea null
         for (Profesor p : profesores) {
             for (Estudiante e : estudiantes) {
 
-                if (p != null && p.getCedula() != null && p.getCedula().equals(Cdla) || e != null && e.getCedula() != null && e.getCedula().equals(Cdla)) {
+                if (p != null && p.getCedula() != null && p.getCedula().equals(Cdla)
+                        || e != null && e.getCedula() != null && e.getCedula().equals(Cdla)) {
                     System.out.println("Cédula ya existente");
                     return true;
                 }
@@ -88,6 +64,7 @@ public class GestorCentroEductvo {
         }
         return false;
     }
+
     public void registrarProfesor(Profesor profesor) {
         if (cantidadProfesores < profesores.length) {
             profesores[cantidadProfesores] = profesor;
@@ -109,47 +86,18 @@ public class GestorCentroEductvo {
                     + " " + profesor.getApellido1().toUpperCase() + " " + profesor.getApellido2().toUpperCase());
             System.out.println("Fecha de Nacimiento: " + profesor.getFechaNacmto());
             System.out.println("Años de Experiencia: " + profesor.getAñosExper());
-            System.out.println("Salario: " + profesor.getSalario()+" $");
-            System.out.println("Edad: "+contrls.Edad(profesor.getFechaNacmto()));
-            System.out.println("-----------------------------");
-        }
-    }
-    public boolean idRepetido(int id){
-        boolean repet=false;
-            for (int i = 0; i < this.getCursos().length; i++) {
-                if (this.getCursos()[i]!=null) {
-                    if (this.getCursos()[i].getId()==id) {
-                    repet=true;
-                    System.out.println("Identificador del curso existente pruebe otro mas");
-                    break;
-                    }
-                } 
-            }
-        return repet;
-    }
-            
-    public void guardarCurso(Curso curso){
-        for (int i = 0; i < cursos.length; i++) {
-            if (this.getCursos()[i]==null) {
-                this.getCursos()[i]=curso;
-                break;
+            System.out.println("Salario: " + profesor.getSalario() + " $");
+            System.out.println("Edad: " + contrls.Edad(profesor.getFechaNacmto()));
+            System.out.println("Cursos pertenecientes: ");
+            for (int j = 0; j < profesores[i].getCursos().length; j++) {
+                if (profesores[i].getCursos()[j] != null) {
+                System.out.print( "-"+profesores[i].getCursos()[j].getNombre()+" ");
+                }
             }
         }
-        System.out.println("El curso ha guardado con éxito \n ");
     }
-    public void estudiantesInscritos(int posicion){
-        System.out.println("\n------"+this.getCursos()[posicion].getNombre()+"----------");
-        System.out.println("Profesor Asignado: "+this.getCursos()[posicion].getProfesor().getNombre1());
-        for (int i = 0; i < this.getCursos()[posicion].getEstudiantes().length; i++) {
-            if (this.getCursos()[posicion].getEstudiantes()[i]!=null) {
-                 System.out.println((i+1)+")"+this.getCursos()[posicion].getEstudiantes()[i].getNombre1()+" "+this.getCursos()[posicion].getEstudiantes()[i].getApellido1());
-            }
-        }
-        System.out.println(" ");
-    }
-
-    public void imprimirEstudiantes() {
-    Controles contrls = new Controles();
+        public void imprimirEstudiantes() {
+        Controles contrls = new Controles();
         System.out.println("Lista de Estudiantes");
         for (int i = 0; i < cantidadEstudiantes; i++) {
             Estudiante estudiante = estudiantes[i];
@@ -159,43 +107,111 @@ public class GestorCentroEductvo {
                     + " " + estudiante.getApellido1().toUpperCase() + " " + estudiante.getApellido2().toUpperCase());
             System.out.println("Edad: " + contrls.Edad(estudiante.getFechaNacmto()));
             System.out.println("Dirección: " + estudiante.getDireccion());
+            System.out.print("Cursos en los que esta inscrito: ");
+            for (int j = 0; j < estudiantes[i].getCursos().length; j++)
+                if (estudiantes[i].getCursos()[j] != null) {
+                    System.out.println("--" + estudiantes[i].getCursos()[j].getNombre());
+                }
             System.out.println("-----------------------------");
         }
     }
 
-    public boolean existenciaEstudiantes(int posicionC, int posicionE){
-        boolean verif=true;
-        int comprobador=0;
+    public boolean idRepetido(int id) {
+        boolean repet = false;
+        for (int i = 0; i < this.getCursos().length; i++) {
+            if (this.getCursos()[i] != null) {
+                if (this.getCursos()[i].getId() == id) {
+                    repet = true;
+                    System.out.println("Identificador del curso existente pruebe otro mas");
+                    break;
+                }
+            }
+        }
+        return repet;
+    }
+
+    public void guardarCurso(Curso curso) {
+        for (int i = 0; i < cursos.length; i++) {
+            if (this.getCursos()[i] == null) {
+                this.getCursos()[i] = curso;
+                this.registroCursoProfesor(curso);
+                break;
+            }
+        }
+        if (curso != null) {
+            System.out.println("El curso ha guardado con éxito \n ");
+        }
+    }
+
+    private void registroCursoProfesor(Curso curso) {
+        for (int i = 0; i < profesores.length; i++) {
+            if (this.getProfesores()[i] != null) {
+                if (this.getProfesores()[i].getCedula().equals(curso.getProfesor().getCedula())) {
+                    this.getProfesores()[i].setCursos(curso);
+                }
+            }
+        }
+    }
+
+    private void registroCursoEstudiante(Curso curso, String cedula) {
+        for (int i = 0; i < estudiantes.length; i++) {
+            if (this.getEstudiantes()[i] != null) {
+                if (this.getEstudiantes()[i].getCedula().equals(cedula)) {
+                    this.getEstudiantes()[i].setCursos(curso);
+                }
+            }
+        }
+    }
+
+    public void estudiantesInscritos(int posicion) {
+        System.out.println("\n------" + this.getCursos()[posicion].getNombre() + "----------");
+        System.out.println("Profesor Asignado: " + this.getCursos()[posicion].getProfesor().getNombre1());
+        for (int i = 0; i < this.getCursos()[posicion].getEstudiantes().length; i++) {
+            if (this.getCursos()[posicion].getEstudiantes()[i] != null) {
+                System.out.println((i + 1) + ")" + this.getCursos()[posicion].getEstudiantes()[i].getNombre1() + " "
+                        + this.getCursos()[posicion].getEstudiantes()[i].getApellido1());
+            }
+        }
+        System.out.println(" ");
+    }
+
+
+
+    public boolean existenciaEstudiantes(int posicionC, int posicionE) {
+        boolean verif = true;
+        int comprobador = 0;
         String cedula;
-        if ( this.getEstudiantes()[posicionE]!=null) {
+        if (this.getEstudiantes()[posicionE] != null) {
             cedula = this.getEstudiantes()[posicionE].getCedula();
             for (int j = 0; j < this.getCursos()[posicionC].getEstudiantes().length; j++) {
-                if (this.getCursos()[posicionC].getEstudiantes()[j]!=null) {
+                if (this.getCursos()[posicionC].getEstudiantes()[j] != null) {
                     System.out.println(this.getCursos()[posicionC].getEstudiantes()[j].getCedula());
                     if (this.getCursos()[posicionC].getEstudiantes()[j].getCedula().equals(cedula)) {
-                    System.out.println("El estudiante está ya registrado en curso");
-                    comprobador++;
-                    break;
+                        System.out.println("El estudiante está ya registrado en curso");
+                        comprobador++;
+                        break;
                     }
-                }  
+                }
             }
-        }else{
+        } else {
             System.out.println("Posicion nula");
-            verif=false;
+            verif = false;
         }
-            
-        if (comprobador==0) {
-            verif=false;
+
+        if (comprobador == 0) {
+            verif = false;
         }
         return verif;
     }
-    public void inscripcionCurso(Estudiante estudiante, Curso curso){
+
+    public void inscripcionCurso(Estudiante estudiante, Curso curso,int posicion) {
         for (int i = 0; i < this.getCursos().length; i++) {
-            if (this.getCursos()[i]!=null) {
-                if (this.getCursos()[i].getId()==curso.getId()) {
+            if (this.getCursos()[i] != null) {
+                if (this.getCursos()[i].getId() == curso.getId()) {
                     for (int j = 0; j < this.getCursos()[i].getEstudiantes().length; j++) {
-                        if (this.getCursos()[i].getEstudiantes()[j]==null) {
-                            this.getCursos()[i].getEstudiantes()[j]=estudiante;
+                        if (this.getCursos()[i].getEstudiantes()[j] == null) {
+                            this.getCursos()[i].getEstudiantes()[j] = estudiante;
+                            this.registroCursoEstudiante(curso, this.getEstudiantes()[posicion].getCedula());
                             break;
                         }
                     }
@@ -203,73 +219,74 @@ public class GestorCentroEductvo {
             }
         }
     }
-    public Curso seleccionCurso(int posicion){
+
+    public Curso seleccionCurso(int posicion) {
         return this.getCursos()[posicion];
     }
-    public Estudiante seleccionEstudiante(int posicion){
+
+    public Estudiante seleccionEstudiante(int posicion) {
         return this.getEstudiantes()[posicion];
     }
-    public int listaCursos(){
-        int contadorCursos=0;
-        if (this.getCursos()[0]!=null) {
+
+    public int listaCursos() {
+        int contadorCursos = 0;
+        if (this.getCursos()[0] != null) {
             System.out.println("-----Lista de Cursos-----");
-            for(int i = 0;i<this.getCursos().length;i++){
-                if (this.getCursos()[i]!=null) {
-                 System.out.println((i+1)+") "+this.getCursos()[i].getNombre());
-                 contadorCursos++;
+            for (int i = 0; i < this.getCursos().length; i++) {
+                if (this.getCursos()[i] != null) {
+                    System.out.println((i + 1) + ") " + this.getCursos()[i].getNombre());
+                    contadorCursos++;
+                } else {
+                    System.out.println((i + 1) + ")----------");
                 }
-                else{
-                    System.out.println((i+1)+")----------");
-                }
-            }          
-            
-        }else{
+            }
+
+        } else {
             System.out.println("No existen cursos ingresados");
         }
         return contadorCursos;
     }
 
-    public int listaEstudiantes(){
-        int contadorEstudiantes=0;
-        if (this.getEstudiantes()[0]!=null) {
+    public int listaEstudiantes() {
+        int contadorEstudiantes = 0;
+        if (this.getEstudiantes()[0] != null) {
             System.out.println("-----Lista de Estudiantes-----");
-            for(int i = 0;i<this.getProfesores().length;i++){
-                if (this.getEstudiantes()[i]!=null) {
-                 System.out.println((i+1)+") "+this.getEstudiantes()[i].getNombre1()+" "+this.getEstudiantes()[i].getApellido1());
-                 contadorEstudiantes++;
+            for (int i = 0; i < this.getProfesores().length; i++) {
+                if (this.getEstudiantes()[i] != null) {
+                    System.out.println((i + 1) + ") " + this.getEstudiantes()[i].getNombre1() + " "
+                            + this.getEstudiantes()[i].getApellido1());
+                    contadorEstudiantes++;
+                } else {
+                    System.out.println((i + 1) + ")--------");
                 }
-                else{
-                    System.out.println((i+1)+")--------");
-                }
-            }          
-            
-        }else{
+            }
+
+        } else {
             System.out.println("No existen estudiantes ingresados");
         }
         return contadorEstudiantes;
     }
 
-
-    public Profesor eleccionProfesor(){
-        int contadorProfesores=0;
-        Profesor p=null;
-        if (this.getProfesores()[0]!=null) {
+    public Profesor eleccionProfesor() {
+        int contadorProfesores = 0;
+        Profesor p = null;
+        if (this.getProfesores()[0] != null) {
             System.out.println("-----Lista de Profesores-----");
-            for(int i = 0;i<this.getProfesores().length;i++){
-                if (this.getProfesores()[i]!=null) {
-                 System.out.println((i+1)+") "+this.getProfesores()[i].getNombre1()+" "+this.getProfesores()[i].getApellido1());
-                 contadorProfesores++;
+            for (int i = 0; i < this.getProfesores().length; i++) {
+                if (this.getProfesores()[i] != null) {
+                    System.out.println((i + 1) + ") " + this.getProfesores()[i].getNombre1() + " "
+                            + this.getProfesores()[i].getApellido1());
+                    contadorProfesores++;
+                } else {
+                    System.out.println((i + 1) + ") Vacante");
                 }
-                else{
-                    System.out.println((i+1)+") Vacante");
-                }
-            }    
+            }
             int eleccion;
             do {
                 eleccion = new Controles().ControlNumrs("Escriba el numero del profesor que desea asignar el curso: ");
-            } while (eleccion>contadorProfesores || eleccion==0);      
-            p=this.getProfesores()[eleccion-1];    
-        }else{
+            } while (eleccion > contadorProfesores || eleccion == 0);
+            p = this.getProfesores()[eleccion - 1];
+        } else {
             System.out.println("No existen maestros ingresados");
         }
         return p;

@@ -11,7 +11,7 @@ class Estudiante extends Persona {
 
     private float promCalifi;
     private String direccion;
-    Curso[] cursos;
+    Curso[] cursos= new Curso[5];
 
     public Estudiante( int edad,String direccion, Curso[] cursos, String cedula, String nombre1, String nombre2, String Apellido1, String Apellido2, String FechaNacmto) {
         super(edad,cedula, nombre1, nombre2, Apellido1, Apellido2, FechaNacmto);
@@ -20,6 +20,14 @@ class Estudiante extends Persona {
     }
     public Estudiante(){
         
+    }
+       public void setCursos(Curso curso){
+        for (int i = 0; i < cursos.length; i++) {
+            if (cursos[i]==null) {
+                cursos[i]= curso;
+                break;
+            }
+        }
     }
 
     public float getPromCalifi() {
@@ -41,17 +49,6 @@ class Estudiante extends Persona {
     public Curso[] getCursos() {
         return this.cursos;
     }
-
-    public void setCursos(Curso[] cursos) {
-        this.cursos = cursos;
-    }
-    
-
-    @Override
-    public String toString() {
-        return "Estudiante" + super.toString() + "\n-Promedio:" + this.promCalifi
-                + "\n-Dirección:" + this.direccion
-                + "\n-Curso:";
-    }
+  
 
 }

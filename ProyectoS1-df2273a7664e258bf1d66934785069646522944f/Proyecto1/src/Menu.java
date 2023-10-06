@@ -179,7 +179,7 @@ public class Menu {
                 } while (seleccionEstudiante > cantEstd && exist);
                 est=this.gestor.seleccionEstudiante(seleccionEstudiante-1);
                 if (!exist) {
-                    gestor.inscripcionCurso(est, curso);    
+                    gestor.inscripcionCurso(est, curso,seleccionEstudiante-1);    
                 }
             }            
         }

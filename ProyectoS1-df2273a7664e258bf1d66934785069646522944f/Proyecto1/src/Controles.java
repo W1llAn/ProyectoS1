@@ -99,10 +99,11 @@ public class Controles {
     }
 
     public void Espacios() {
-        for (int i = 1; i <= 40; i++) {
+        for (int i = 1; i <= 2; i++) {
             System.out.println(" ");
         }
     }
+
 
     public int AñosExperiencia(String fechaNacmiento, String mensaje) {
         boolean aux = true;
