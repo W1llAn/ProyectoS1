@@ -8,14 +8,11 @@
  * @author ASUS
  */
 public class Menu{
-    int op, fechNacmto, aniosExp, salario;
-    String cedula, nom1, nom2, apelldo1, apelldo2, direccion;
-    char opcSn;
     public Teclado tec = new Teclado();
     public GestorCentroEductvo gestor = new GestorCentroEductvo();
     public Controles contrls = new Controles();
-
     public void menu() {
+         int op;
         char opcSn;
         do {
             contrls.Espacios();
@@ -26,11 +23,9 @@ public class Menu{
                 case 1:
                     
                     do{
-                        contrls.Espacios();
-                    System.out.println("Bienvenido a la opción Ingreso de Estudiantes");
+                    contrls.Espacios();
                     Estudiante estudiantes = new Estudiante();
-                    PedirDatosEstudiantes(estudiantes);
-                    gestor.registrarEstudiantes(estudiantes);
+                    gestor.registrarEstudiantes(PedirDatosEstudiantes(estudiantes));
                     System.out.println("Desea registrar a un estudiante nuevo\n ¿S/N?: ");
                     opcSn = tec.Tec().next().toUpperCase().charAt(0);
                 }while (opcSn == 'S');
@@ -195,7 +190,6 @@ public class Menu{
         System.out.println("1)Profesores\n2)Estudiantes\n3)Volver");
         System.out.print("Opción:");
     }
-
     public String ControlCedula() {
         String cedula, patron;
         patron = "^[0-9]{10}$";
@@ -261,6 +255,5 @@ public class Menu{
 
         return cedula;
     }
-
 
 }

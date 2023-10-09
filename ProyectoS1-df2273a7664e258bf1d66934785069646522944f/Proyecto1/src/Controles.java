@@ -21,7 +21,7 @@ public class Controles {
 
     public String controlarCaracteresEspeciales(String mensaje) {
         String patron, palabra;
-        patron = "^[a-zA-ZñÑ ]+$";
+        patron = "^[a-zA-ZñÑ ]+( [a-zA-ZñÑ ]+)*$";
         do {
             System.out.print(mensaje);
             palabra = tec.Tec().next();
@@ -118,4 +118,5 @@ public class Controles {
         } while ((aux == false));
         return numAñosExpe;
     }
+     
 }

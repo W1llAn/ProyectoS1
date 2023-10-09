@@ -15,6 +15,15 @@ public class Profesor extends Trabajador {
     public Profesor() {
         super();
     }
+    public int cursosAsignados(){
+          int cursosAsignados=0;
+        for (int i = 0; i < this.cursos.length; i++) {
+            if (this.cursos[i]!=null) {
+                cursosAsignados++;
+            }
+        }
+        return this.cursos.length-cursosAsignados;
+    }//MOVI EL CURSOSASIGNADOS AFUERA DEL BUCLE POR QUE ESTABA DENTRO Y ESTABAS LLAMANDO AL METODO Y NO A LA VARIABLE EN EL RETURN 
     public Curso[] getCursos(){
         return cursos;
     }
@@ -45,5 +54,14 @@ public class Profesor extends Trabajador {
         this.añosExper = añosExper;
     }
 
-
+     public String toString() {
+        int edad = new Controles().Edad(getFechaNacmto());
+        return "Cédula: " + getCedula().toUpperCase() + "\n" +
+                "Nombre: " + getNombre1().toUpperCase() + " " +
+                getNombre2().toUpperCase() + " " +
+                getApellido1().toUpperCase() + " " + getApellido2().toUpperCase() + "\n" +
+                "Salario: "+getSalario() +"\n"+
+                "Años Experiencia: "+getAñosExper()+ "\n" +
+                "Edad: " + edad + "\n";
+    }
 }

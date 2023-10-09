@@ -63,5 +63,7 @@ class Curso implements Comparable<Curso>{
         }
         return this.nombre.compareTo(c.nombre);
     }
-
+    public String toString(){
+        return "Nombre: "+this.getNombre()+ " Cantidad Estudiantes: ";
+    }
 }

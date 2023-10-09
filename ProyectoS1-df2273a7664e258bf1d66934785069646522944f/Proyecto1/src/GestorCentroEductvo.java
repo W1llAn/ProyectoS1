@@ -3,6 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 
+import java.util.Arrays;
+
 /**
  *
  * @author ASUS
@@ -54,7 +56,6 @@ public class GestorCentroEductvo {
         // itero en relacion a que ya existe datos y en esas posiciones no sea null
         for (Profesor p : profesores) {
             for (Estudiante e : estudiantes) {
-
                 if (p != null && p.getCedula() != null && p.getCedula().equals(Cdla)
                         || e != null && e.getCedula() != null && e.getCedula().equals(Cdla)) {
                     System.out.println("Cédula ya existente");
@@ -76,47 +77,36 @@ public class GestorCentroEductvo {
     }
 
     public void imprimirProfesores() {
-        Controles contrls = new Controles();
         System.out.println("Lista de Profesores");
-        for (int i = 0; i < cantidadProfesores; i++) {
-            Profesor profesor = profesores[i];
-            System.out.println("Cédula: " + profesor.getCedula().toUpperCase());
-            System.out.println("Nombre: " + profesor.getNombre1().toUpperCase() + " "
-                    + profesor.getNombre2().toUpperCase()
-                    + " " + profesor.getApellido1().toUpperCase() + " " + profesor.getApellido2().toUpperCase());
-            System.out.println("Fecha de Nacimiento: " + profesor.getFechaNacmto());
-            System.out.println("Años de Experiencia: " + profesor.getAñosExper());
-            System.out.println("Salario: " + profesor.getSalario() + " $");
-            System.out.println("Edad: " + contrls.Edad(profesor.getFechaNacmto())+" años");
-            System.out.println("Cursos pertenecientes: ");
-            for (int j = 0; j < profesores[i].getCursos().length; j++) {
-                if (profesores[i].getCursos()[j] != null) {
-                System.out.print( "-"+profesores[i].getCursos()[j].getNombre()+" ");
-                }else{
-                System.out.println("Aún no tiene cursos asignados");
-                break;
+            for (int i = 0; i < cantidadProfesores; i++){
+                Profesor profesor = profesores[i];
+                System.out.println(profesor.toString());
+                System.out.println("Cursos en los que esta inscrito: ");
+                for(Curso curso : profesor.getCursos()){
+                    if (curso != null) {
+                            System.out.println("--" + curso.getNombre());
+                        }else{
+                            System.out.println("Aún no tiene cursos asignados");
+                            break;
+                        }
                 }
-            }
             System.out.println(" ___________________________________\n");
         }
     }
         public void imprimirEstudiantes() {
-        Controles contrls = new Controles();
-        System.out.println("Lista de Estudiantes");
-        for (int i = 0; i < cantidadEstudiantes; i++) {
-            Estudiante estudiante = estudiantes[i];
-            System.out.println("Cédula: " + estudiante.getCedula().toUpperCase());
-            System.out.println("Nombre: " + estudiante.getNombre1().toUpperCase() + " "
-                    + estudiante.getNombre2().toUpperCase()
-                    + " " + estudiante.getApellido1().toUpperCase() + " " + estudiante.getApellido2().toUpperCase());
-            System.out.println("Edad: " + contrls.Edad(estudiante.getFechaNacmto()));
-            System.out.println("Dirección: " + estudiante.getDireccion());
-            System.out.print("Cursos en los que esta inscrito: ");
-            for (int j = 0; j < estudiantes[i].getCursos().length; j++)
-                if (estudiantes[i].getCursos()[j] != null) {
-                    System.out.println("--" + estudiantes[i].getCursos()[j].getNombre());
-                }
-            System.out.println("-----------------------------");
+    for (int i = 0; i < cantidadEstudiantes; i++) {
+                    Estudiante estudiante = estudiantes[i];
+                    System.out.println(estudiante.toString());
+                    System.out.print("Cursos en los que está inscrito: ");
+                    for (Curso curso : estudiante.getCursos()) {
+                        if (curso != null) {
+                            System.out.println("--" + curso.getNombre());
+                        }else{
+                            System.out.println("Aún no tiene cursos asignados");
+                            break;
+                        }
+                    }
+           System.out.println(" ____________________________________\n");
         }
     }
 
@@ -229,19 +219,23 @@ public class GestorCentroEductvo {
         }
     }
 
-    //METODOSS PARA COMPROBAR EL CUPO QUE TIENE UN CURSO Y EL DE ESTUDIANTE----------------------------------------------------------
+    //METODOS PARA COMPROBAR EL CUPO QUE TIENE UN CURSO Y EL DE ESTUDIANTE----------------------------------------------------------
     public Curso comprobarCuposCurso(int posicion) {
-        if (this.getCursos()[posicion].cupo(this.getCursos()[posicion].getId())==0) {
-            System.out.println("El Curso de"+this.getCursos()[posicion].getNombre()+"está lleno");
+        if (this.comprobarCupoCursoProfesor(this.getCursos()[posicion].getProfesor())) {
+            if (this.getCursos()[posicion].cupo(this.getCursos()[posicion].getId())==0) {
+                System.out.println("El Curso de"+this.getCursos()[posicion].getNombre()+"está lleno");
+                return null;
+            }
+            else{
+            return this.getCursos()[posicion];
+            }
+        }else{
             return null;
-        }
-        else{
-        return this.getCursos()[posicion];
         }
     }
 
     public Estudiante comprobarCupoCursoEstudiante(int posicion) {
-        if (this.getEstudiantes()[posicion].cupo(this.getCursos()[posicion].getId())==0) {
+        if (this.getEstudiantes()[posicion].cupo()==0) {
             System.out.println("El Estudiante ha alcanzado el maximo de cursos inscrito");
             return null;
         }else{
@@ -249,6 +243,15 @@ public class GestorCentroEductvo {
         }
     }
 
+    public boolean comprobarCupoCursoProfesor(Profesor prof){
+        if (prof.cursosAsignados()==0) {
+            System.out.println("El profesor ha alcazado el limite de cursos asignados");
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
 
     
     //METODOS QUE IMPRIMEN UN LISTADO DE LOS CURSOS Y ESTUDIANTES, DEVUELVEN EL NUMERO DE CURSOS Y ESTUDIANTES REGISTRADOS------------
@@ -318,7 +321,12 @@ public class GestorCentroEductvo {
         return p;
     }
      public void ordenarEstdCurso(){
-   
+        Arrays.sort(this.cursos);
+        for (Curso c : this.cursos){
+            if(c!=null){
+                System.out.println(c.toString());
+            }
+        }
 
     }
 
