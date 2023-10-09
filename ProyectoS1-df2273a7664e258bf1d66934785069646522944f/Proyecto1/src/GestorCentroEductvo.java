@@ -147,6 +147,7 @@ public class GestorCentroEductvo {
         }
     }
 
+
     //GUARDAR LA INFORMACION DEL CURSO EN LOS DATOS DE ESTUDIANTE Y DOCENTE-------------------------------------------------------
     private void registroCursoProfesor(Curso curso) {
         for (int i = 0; i < profesores.length; i++) {
@@ -167,6 +168,9 @@ public class GestorCentroEductvo {
             }
         }
     }
+    //-----------------------------------------------------------------------------------------------------------------------------
+
+
 
     public void estudiantesInscritos(int posicion) {
         System.out.println("\n------" + this.getCursos()[posicion].getNombre() + "----------");
@@ -245,6 +249,9 @@ public class GestorCentroEductvo {
         }
     }
 
+
+    
+    //METODOS QUE IMPRIMEN UN LISTADO DE LOS CURSOS Y ESTUDIANTES, DEVUELVEN EL NUMERO DE CURSOS Y ESTUDIANTES REGISTRADOS------------
     public int listaCursos() {
         int contadorCursos = 0;
         if (this.getCursos()[0] != null) {
@@ -283,6 +290,8 @@ public class GestorCentroEductvo {
         }
         return contadorEstudiantes;
     }
+    //---------------------------------------------------------------------------------------------------------------------------
+
 
     public Profesor eleccionProfesor() {
         int contadorProfesores = 0;
