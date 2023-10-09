@@ -21,6 +21,15 @@ class Estudiante extends Persona {
     public Estudiante(){
         
     }
+    public int cupo(int id){
+        int cuposLlenos=0;
+        for (int i = 0; i < this.cursos.length; i++) {
+            if (this.cursos[i]!=null) {
+                cuposLlenos++;
+            }
+        }
+        return this.cursos.length-cuposLlenos;
+    }
        public void setCursos(Curso curso){
         for (int i = 0; i < cursos.length; i++) {
             if (cursos[i]==null) {

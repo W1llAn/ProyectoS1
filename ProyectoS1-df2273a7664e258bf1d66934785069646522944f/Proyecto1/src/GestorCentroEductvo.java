@@ -143,6 +143,7 @@ public class GestorCentroEductvo {
         }
     }
 
+    //GUARDAR LA INFORMACION DEL CURSO EN LOS DATOS DE ESTUDIANTE Y DOCENTE-------------------------------------------------------
     private void registroCursoProfesor(Curso curso) {
         for (int i = 0; i < profesores.length; i++) {
             if (this.getProfesores()[i] != null) {
@@ -220,12 +221,24 @@ public class GestorCentroEductvo {
         }
     }
 
-    public Curso seleccionCurso(int posicion) {
+    //METODOSS PARA COMPROBAR EL CUPO QUE TIENE UN CURSO Y EL DE ESTUDIANTE----------------------------------------------------------
+    public Curso comprobarCuposCurso(int posicion) {
+        if (this.getCursos()[posicion].cupo(this.getCursos()[posicion].getId())==0) {
+            System.out.println("El Curso de"+this.getCursos()[posicion].getNombre()+"está lleno");
+            return null;
+        }
+        else{
         return this.getCursos()[posicion];
+        }
     }
 
-    public Estudiante seleccionEstudiante(int posicion) {
-        return this.getEstudiantes()[posicion];
+    public Estudiante comprobarCupoCursoEstudiante(int posicion) {
+        if (this.getEstudiantes()[posicion].cupo(this.getCursos()[posicion].getId())==0) {
+            System.out.println("El Estudiante ha alcanzado el maximo de cursos inscrito");
+            return null;
+        }else{
+            return this.getEstudiantes()[posicion];
+        }
     }
 
     public int listaCursos() {

@@ -7,7 +7,7 @@
  *
  * @author ASUS
  */
-public class Menu implements Comparable<Curso>{
+public class Menu{
     int op, fechNacmto, aniosExp, salario;
     String cedula, nom1, nom2, apelldo1, apelldo2, direccion;
     char opcSn;
@@ -171,9 +171,9 @@ public class Menu implements Comparable<Curso>{
             do {
                 seleccionCurso=this.contrls.ControlNumrs("Ingrese una opcion: ");        
             } while (seleccionCurso > cantCurso);
-            curso = gestor.seleccionCurso(seleccionCurso-1);
+            curso = gestor.comprobarCuposCurso(seleccionCurso-1);
             cantEstd = gestor.listaEstudiantes();
-            if (cantEstd!=0) {
+            if (cantEstd!=0 && curso!=null) {
                 do {
                 seleccionEstudiante = this.contrls.ControlNumrs("Ingrese una opcion: ");
                 exist=gestor.existenciaEstudiantes(seleccionCurso-1, seleccionEstudiante-1);
@@ -181,12 +181,13 @@ public class Menu implements Comparable<Curso>{
                     break;
                 }
                 } while (seleccionEstudiante > cantEstd && exist);
-                est=this.gestor.seleccionEstudiante(seleccionEstudiante-1);
-                if (!exist) {
+                est=this.gestor.comprobarCupoCursoEstudiante(seleccionEstudiante-1);
+                if (!exist && est != null) {
                     gestor.inscripcionCurso(est, curso,seleccionEstudiante-1);    
                 }
             }            
         }
+
     }
 
     public void subMenu() {
