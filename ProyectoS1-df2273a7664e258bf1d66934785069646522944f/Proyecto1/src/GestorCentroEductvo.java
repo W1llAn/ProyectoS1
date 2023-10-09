@@ -87,13 +87,17 @@ public class GestorCentroEductvo {
             System.out.println("Fecha de Nacimiento: " + profesor.getFechaNacmto());
             System.out.println("Años de Experiencia: " + profesor.getAñosExper());
             System.out.println("Salario: " + profesor.getSalario() + " $");
-            System.out.println("Edad: " + contrls.Edad(profesor.getFechaNacmto()));
+            System.out.println("Edad: " + contrls.Edad(profesor.getFechaNacmto())+" años");
             System.out.println("Cursos pertenecientes: ");
             for (int j = 0; j < profesores[i].getCursos().length; j++) {
                 if (profesores[i].getCursos()[j] != null) {
                 System.out.print( "-"+profesores[i].getCursos()[j].getNombre()+" ");
+                }else{
+                System.out.println("Aún no tiene cursos asignados");
+                break;
                 }
             }
+            System.out.println(" ___________________________________\n");
         }
     }
         public void imprimirEstudiantes() {

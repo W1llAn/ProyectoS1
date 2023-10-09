@@ -23,7 +23,7 @@ public class Controles {
         String patron, palabra;
         patron = "^[a-zA-ZñÑ ]+$";
         do {
-            System.out.println(mensaje);
+            System.out.print(mensaje);
             palabra = tec.Tec().next();
             if (!(palabra.matches(patron))) {
                 System.out.println("No se permiten el ingreso de caracteres especiales ");
@@ -36,25 +36,25 @@ public class Controles {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         dateFormat.setLenient(false);
         String inputDate;
-        Date date = null;
+        Date fecha = null;
         // Bucle hasta que se ingrese una fecha válida
-        while (date == null) {
+        while (fecha == null) {
             System.out.print("Ingrese su fecha de nacimiento (formato dd/MM/yyyy): ");
             inputDate = tec.Tec().nextLine();
 
             try {
-                date = dateFormat.parse(inputDate);
+                fecha = dateFormat.parse(inputDate);
                 // Verificar si la fecha ingresada es mayor que la fecha actual
-                if (date.after(new Date())) {
+                if (fecha.after(new Date())) {
                     System.out.println("La fecha de nacimiento no puede estar en el futuro.");
-                    date = null; // Reiniciar para volver a solicitar la fecha
+                    fecha = null; // Reiniciar para volver a solicitar la fecha
                 }
             } catch (ParseException e) {
                 System.out.println("Fecha de nacimiento no válida. Intente nuevamente.");
             }
         }
 
-        return date;
+        return fecha;
     }
 
     public String controlFechaNacmto() {
@@ -105,19 +105,17 @@ public class Controles {
 
     public int AñosExperiencia(String fechaNacmiento, String mensaje) {
         boolean aux = true;
-        String num = "";
-        int añosExpp;
+        int numAñosExpe =0,edadProfesor;
         do {
-            añosExpp=ControlNumrs(mensaje);
-            añosExpp = Integer.parseInt(num);
-            int anioCal = Edad(fechaNacmiento);
-            if (añosExpp > (anioCal - 18)) {
+            numAñosExpe=ControlNumrs(mensaje);
+            edadProfesor = Edad(fechaNacmiento);
+            if (numAñosExpe > (edadProfesor - 18)) {
                 System.out.println("Ingrese sus años de experiencia verdaderos");
                 aux = false;
             } else {
                       aux = true;
             }
         } while ((aux == false));
-        return añosExpp;
+        return numAñosExpe;
     }
 }
