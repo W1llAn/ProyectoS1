@@ -87,7 +87,8 @@ public class Menu{
                     }while (opcSn == 'S');                 
                     break;
                 case 7:
-                    
+                    System.out.println("----LISTA DE ACEPTACION DE LOS CURSOS POR PARTE DE LOS ESTUDIANTES----");
+                    gestor.ordenarEstdCurso();
                 break;
                 case 8:
                     contrls.Espacios();
