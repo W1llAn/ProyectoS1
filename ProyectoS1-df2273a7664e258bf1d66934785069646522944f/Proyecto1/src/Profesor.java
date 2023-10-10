@@ -22,7 +22,7 @@ public class Profesor extends Trabajador {
                 cursosAsignados++;
             }
         }
-        return this.cursos.length-cursosAsignados;
+        return cursosAsignados;
     }//MOVI EL CURSOSASIGNADOS AFUERA DEL BUCLE POR QUE ESTABA DENTRO Y ESTABAS LLAMANDO AL METODO Y NO A LA VARIABLE EN EL RETURN 
     public Curso[] getCursos(){
         return cursos;

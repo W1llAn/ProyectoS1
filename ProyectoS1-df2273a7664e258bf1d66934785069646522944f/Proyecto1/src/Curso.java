@@ -22,7 +22,7 @@ class Curso implements Comparable<Curso>{
                 cuposLlenos++;
             }
         }
-        return estudiantes.length-cuposLlenos;
+        return cuposLlenos;
     }
     public int getCantHours(){
         return this.CantHors;
@@ -59,11 +59,11 @@ class Curso implements Comparable<Curso>{
    @Override
     public int compareTo(Curso c){
         if(c == null){
-            return 1;
+            return -1;
         }
-        return this.nombre.compareTo(c.nombre);
+        return c.cupo(c.id) - this.cupo(this.id);
     }
     public String toString(){
-        return "Nombre: "+this.getNombre()+ " Cantidad Estudiantes: ";
+        return "Nombre: "+this.getNombre()+ " Cantidad Estudiantes: "+this.cupo(this.id);
     }
 }

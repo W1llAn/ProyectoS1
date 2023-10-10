@@ -169,7 +169,7 @@ public class Menu{
             } while (seleccionCurso > cantCurso);
             curso = gestor.comprobarCuposCurso(seleccionCurso-1);
             cantEstd = gestor.listaEstudiantes();
-            if (cantEstd!=0 && curso!=null) {
+            if (cantEstd!=0) {
                 do {
                 seleccionEstudiante = this.contrls.ControlNumrs("Ingrese una opcion: ");
                 exist=gestor.existenciaEstudiantes(seleccionCurso-1, seleccionEstudiante-1);
